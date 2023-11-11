@@ -10,23 +10,34 @@ import html2canvas from 'html2canvas';
   templateUrl: './tienda.component.html',
   styleUrls: ['./tienda.component.css'],
 })
-export class TiendaComponent implements OnInit {
 
-  captureScreen() {
-    html2canvas(document.body).then(canvas => {
-      const screenshot = canvas.toDataURL('image/png');
-      console.log(screenshot);
+export class TiendaComponent implements OnInit {  
   
-      // Aquí puedes guardar la imagen o realizar cualquier otra acción con la captura de pantalla
-    });
-  }  
+  color: string = '#DCDCDC';
+  shirtMesh: THREE.Mesh | undefined;
+
+  switchColor(_color: string) {
+    this.color = _color;
   
+    // Verifica si la camisa ya se ha cargado y asignado a la variable shirtMesh
+    if (this.shirtMesh) {
+      // Verifica que el material sea de tipo MeshStandardMaterial
+      if (this.shirtMesh.material instanceof THREE.MeshStandardMaterial) {
+        // Cambia el color de la camisa
+        this.shirtMesh.material.color.set(new THREE.Color(this.color));
+      } else {
+        console.error('El material de la camisa no es del tipo esperado (MeshStandardMaterial).');
+      }
+    }
+  }
   
-  ngOnInit() {
+  ngOnInit() { 
+
     const renderer = new THREE.WebGLRenderer();
 
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
+    renderer.setSize(window.innerWidth/2, window.innerHeight/2);
+    document.getElementById('camisa')?.appendChild(renderer.domElement);
+    // document.body.appendChild(renderer.domElement);
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
       75,
@@ -47,36 +58,31 @@ export class TiendaComponent implements OnInit {
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.5); // Color blanco, intensidad 0.5
     scene.add(ambientLight);
 
-    const gui = new dat.GUI({ autoPlace: false });
+    // const gui = new dat.GUI({ autoPlace: false });
     const config = {
       color: 0x0,
     };
-    gui.domElement.style.position = 'absolute';
-    gui.domElement.style.top = '750px';
-    gui.domElement.style.left = '830px';
-    gui.domElement.style.width = '300px';
-    document.body.appendChild(gui.domElement);
+    // gui.domElement.style.position = 'absolute';
+    // gui.domElement.style.top = '750px';
+    // gui.domElement.style.left = '830px';
+    // gui.domElement.style.width = '300px';
+    // document.body.appendChild(gui.domElement);
 
     const loader = new GLTFLoader();
     loader.load(
-      '/assets/camiseta.glb',
+      '/assets/img/camiseta.glb',
       (gltf) => {
         gltf.scene.traverse((child) => {
           if (child instanceof THREE.Mesh) {
             child.position.y = -30;
             child.material.metalness = 0;
             child.material.roughness = 0.5;
-            child.material.color.set(0x0);
+            child.material.color.set(new THREE.Color('#F2F3EE'));
+            // Guarda la referencia al mesh de la camisa
+            this.shirtMesh = child;
           }
         });
         gltf.scene.scale.set(0.4, 0.4, 0.4);
-        gui.addColor(config, 'color').onChange((newColor) => {
-          gltf.scene.traverse((child) => {
-            if (child instanceof THREE.Mesh) {
-              child.material.color.set(newColor);
-            }
-          });
-        });
         scene.add(gltf.scene);
       },
       undefined,
@@ -85,7 +91,7 @@ export class TiendaComponent implements OnInit {
       }
     );
 
-    const logopecho = new THREE.TextureLoader().load('/assets/logo.avif');
+    const logopecho = new THREE.TextureLoader().load('/assets/4k-monitor-image2-1.jpg');
     const logoPecho = new THREE.MeshBasicMaterial({
       map: logopecho,
       transparent: true,

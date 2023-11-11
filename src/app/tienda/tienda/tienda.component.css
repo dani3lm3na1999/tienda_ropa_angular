@@ -1,3 +1,41 @@
+#colores {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-  
-  
+}
+
+#contendor-camisa{
+    box-shadow: 3px 3px 5px gray;
+}
+
+.circular-button {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin: 5px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out; /* Animación de expansión */
+    border: 2px solid rgb(2, 2, 2); /* Borde inicialmente transparente */
+  }
+
+.gray { background-color: #F2F3EE; }
+.yellow { background-color: #ffff00; }
+.green { background-color: #008000; }
+.blueviolet { background-color: #8a2be2; }
+.red { background-color: #ff0000; }
+.black { background-color: #2a2929; }
+
+/* Estilos adicionales al pasar el ratón sobre los botones */
+.circular-button:hover {
+  border-color: #fff; /* Cambia el color del borde al pasar el ratón sobre el botón */
+}
+
+/* Estilos adicionales al presionar el botón */
+.circular-button:active {
+  transform: scale(1.2); /* Hace que el botón se expanda al ser presionado */
+}
+
+.card{
+  box-shadow: 3px 3px 5px gray;
+}

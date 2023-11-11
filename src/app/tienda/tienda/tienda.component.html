@@ -1,12 +1,56 @@
-<button (click)="captureScreen()">Capturar Pantalla</button>
-
-<div>
-    <!-- <div style="position: absolute; min-width: 400px; min-height: 950px; background-color: blue;" >
-        LOGOS
-    </div> -->
-
-    <!-- <div style="position: absolute; min-width: 400px; min-height: 950px; margin-left: 1440px; background-color: blue;" >
-        OPCIONES DEL CUERPO
-    </div> -->
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-lg-5" id="contendor-camisa">
+            <div class="row" id="camisa">
+            </div>
+            <div class="row">
+                <div class="col" id="colores">
+                    <button class="circular-button gray" (click)="switchColor('#F2F3EE')"></button>
+                    <button class="circular-button yellow" (click)="switchColor('yellow')"></button>
+                    <button class="circular-button green" (click)="switchColor('green')"></button>
+                    <button class="circular-button blueviolet" value (click)="switchColor('blueviolet')"></button>
+                    <button class="circular-button red" (click)="switchColor('red')"></button>
+                    <button class="circular-button black" (click)="switchColor('black')"></button>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-7">
+            <div class="card text-center">
+                <div class="card-header">
+                    Datos a Guardar
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>Tipo Tela</option>
+                            <option value="1">Algodón</option>
+                            <option value="2">Nailon</option>
+                            <option value="3">Poliéster</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>Talla</option>
+                            <option value="1">S</option>
+                            <option value="2">M</option>
+                            <option value="3">L</option>
+                            <option value="3">XL</option>
+                        </select>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="number" class="form-control" id="floatingPrecio">
+                        <label for="floatingPrecio">Precio</label>
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="customFile">
+                        <label class="custom-file-label" for="customFile">Seleccionar archivo</label>
+                    </div>
+                </div>
+                <div class="card-footer text-muted d-flex justify-content-between">
+                    <button class="btn btn-outline-success"><i class="bi bi-floppy-fill"></i></button>
+                    <button class="btn btn-outline-info"><i class="bi bi-download"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-  
