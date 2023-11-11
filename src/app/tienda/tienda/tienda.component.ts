@@ -11,31 +11,48 @@ import html2canvas from 'html2canvas';
   styleUrls: ['./tienda.component.css'],
 })
 
-export class TiendaComponent implements OnInit {  
-  
-  color: string = '#DCDCDC';
+export class TiendaComponent implements OnInit {
+
+  color: string = 'rgb(204, 204, 204)';
   shirtMesh: THREE.Mesh | undefined;
+  shirtScene: THREE.Scene | undefined;
 
   switchColor(_color: string) {
     this.color = _color;
-  
+
     // Verifica si la camisa ya se ha cargado y asignado a la variable shirtMesh
     if (this.shirtMesh) {
       // Verifica que el material sea de tipo MeshStandardMaterial
       if (this.shirtMesh.material instanceof THREE.MeshStandardMaterial) {
-        // Cambia el color de la camisa
+
+        if (this.shirtScene){
+          if (this.color === 'rgb(204, 204, 204)'){
+            this.shirtScene.background = new THREE.Color('rgb(204, 204, 204)')
+          }else if(this.color === 'rgb(239, 189, 78)'){
+            this.shirtScene.background = new THREE.Color('rgb(239, 189, 78)')
+          } else if(this.color === 'rgb(128, 198, 112)'){
+            this.shirtScene.background = new THREE.Color('rgb(128, 198, 112)')
+          } else if(this.color === 'rgb(114, 109, 232)'){
+            this.shirtScene.background = new THREE.Color('rgb(114, 109, 232)')
+          }else if(this.color === 'rgb(239, 103, 78)'){
+            this.shirtScene.background = new THREE.Color('rgb(239, 103, 78)')
+          }else {
+            this.shirtScene.background = new THREE.Color('rgb(53, 57, 52)')
+          }
+        }
+
         this.shirtMesh.material.color.set(new THREE.Color(this.color));
       } else {
         console.error('El material de la camisa no es del tipo esperado (MeshStandardMaterial).');
       }
     }
   }
-  
-  ngOnInit() { 
+
+  ngOnInit() {
 
     const renderer = new THREE.WebGLRenderer();
 
-    renderer.setSize(window.innerWidth/2, window.innerHeight/2);
+    renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
     document.getElementById('camisa')?.appendChild(renderer.domElement);
     // document.body.appendChild(renderer.domElement);
     const scene = new THREE.Scene();
@@ -59,9 +76,9 @@ export class TiendaComponent implements OnInit {
     scene.add(ambientLight);
 
     // const gui = new dat.GUI({ autoPlace: false });
-    const config = {
-      color: 0x0,
-    };
+    // const config = {
+    //   color: 0x0,
+    // };
     // gui.domElement.style.position = 'absolute';
     // gui.domElement.style.top = '750px';
     // gui.domElement.style.left = '830px';
@@ -77,7 +94,7 @@ export class TiendaComponent implements OnInit {
             child.position.y = -30;
             child.material.metalness = 0;
             child.material.roughness = 0.5;
-            child.material.color.set(new THREE.Color('#F2F3EE'));
+            child.material.color.set(new THREE.Color('rgb(204, 204, 204)'));
             // Guarda la referencia al mesh de la camisa
             this.shirtMesh = child;
           }
@@ -136,11 +153,11 @@ export class TiendaComponent implements OnInit {
 
     scene.add(logoMeshHombro);
 
-    const spaceTexture = new THREE.TextureLoader().load(
-      '/assets/resumen-superficie-texturas-muro-piedra-hormigon-blanco_74190-8189.avif'
-    ); //imagen de fondo
+    // const spaceTexture = new THREE.TextureLoader().load(
+    //   '/assets/resumen-superficie-texturas-muro-piedra-hormigon-blanco_74190-8189.avif'
+    // ); //imagen de fondo
 
-    scene.background = spaceTexture;
+    scene.background = new THREE.Color(0x808080);
 
     function animate() {
       requestAnimationFrame(animate);
@@ -148,6 +165,7 @@ export class TiendaComponent implements OnInit {
       renderer.render(scene, camera);
     }
 
+    this.shirtScene = scene;
     animate();
   }
 }
