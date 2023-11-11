@@ -43,3 +43,13 @@
 .card{
   box-shadow: 3px 3px 5px gray;
 }
+
+@media screen and (max-width: 768px) {
+  #contendor-camisa{
+    margin-bottom: 2rem;
+  }
+
+  #contenedor-datos{
+    margin-bottom: 2rem;
+  }
+}
