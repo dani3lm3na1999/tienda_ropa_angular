@@ -2,20 +2,51 @@ import { Component, OnInit } from '@angular/core';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import * as dat from 'dat.gui';
-import html2canvas from 'html2canvas';
+import { ProductosService } from 'src/app/Service/productos.service';
+import { FormBuilder, FormGroup ,Validators} from '@angular/forms';
+import { LogsService } from 'src/app/Service/logs.service';
+import { CategoriasService } from 'src/app/Service/categorias.service';
 
 @Component({
   selector: 'app-tienda',
   templateUrl: './tienda.component.html',
   styleUrls: ['./tienda.component.css'],
 })
-
 export class TiendaComponent implements OnInit {
+  formGuardarProductos: FormGroup;
+  urlpecho:String = "";
+  lstMostrarCategorias:any;
+  selectCategoria:any;
+  constructor(
+    private fb: FormBuilder,
+    private productosServices: ProductosService,
+    private logoServices: LogsService,
+    private categoriasServices: CategoriasService,
+  ) {
+    this.formGuardarProductos = this.fb.group({
+      nombre: ['', Validators.required],
+      descripcion: ['', Validators.required],
+      imagen: [],
+      talla: [],
+      tela: [],
+      existencias: ['', Validators.required],
+      precio: [],
+      torzoUrl: [],
+      hombroUrl: [],
+      pechoUrl: [],
+      categoria: [],
+    });
+  }
 
   color: string = 'rgb(204, 204, 204)';
   shirtMesh: THREE.Mesh | undefined;
   shirtScene: THREE.Scene | undefined;
+  elementos = [
+    { imagen: '/assets/logobrazoizquierdo.jpg' },
+    { imagen: '/assets/4k-monitor-image2-1.jpg' },
+    { imagen: '/assets/logoespalda.webp' },
+    { imagen: '/assets/logo.avif' },
+  ];
 
   switchColor(_color: string) {
     this.color = _color;
@@ -24,34 +55,84 @@ export class TiendaComponent implements OnInit {
     if (this.shirtMesh) {
       // Verifica que el material sea de tipo MeshStandardMaterial
       if (this.shirtMesh.material instanceof THREE.MeshStandardMaterial) {
-
-        if (this.shirtScene){
-          if (this.color === 'rgb(204, 204, 204)'){
-            this.shirtScene.background = new THREE.Color('rgb(204, 204, 204)')
-          }else if(this.color === 'rgb(239, 189, 78)'){
-            this.shirtScene.background = new THREE.Color('rgb(239, 189, 78)')
-          } else if(this.color === 'rgb(128, 198, 112)'){
-            this.shirtScene.background = new THREE.Color('rgb(128, 198, 112)')
-          } else if(this.color === 'rgb(114, 109, 232)'){
-            this.shirtScene.background = new THREE.Color('rgb(114, 109, 232)')
-          }else if(this.color === 'rgb(239, 103, 78)'){
-            this.shirtScene.background = new THREE.Color('rgb(239, 103, 78)')
-          }else {
-            this.shirtScene.background = new THREE.Color('rgb(53, 57, 52)')
+        if (this.shirtScene) {
+          if (this.color === 'rgb(204, 204, 204)') {
+            this.shirtScene.background = new THREE.Color('rgb(204, 204, 204)');
+          } else if (this.color === 'rgb(239, 189, 78)') {
+            this.shirtScene.background = new THREE.Color('rgb(239, 189, 78)');
+          } else if (this.color === 'rgb(128, 198, 112)') {
+            this.shirtScene.background = new THREE.Color('rgb(128, 198, 112)');
+          } else if (this.color === 'rgb(114, 109, 232)') {
+            this.shirtScene.background = new THREE.Color('rgb(114, 109, 232)');
+          } else if (this.color === 'rgb(239, 103, 78)') {
+            this.shirtScene.background = new THREE.Color('rgb(239, 103, 78)');
+          } else {
+            this.shirtScene.background = new THREE.Color('rgb(53, 57, 52)');
           }
         }
 
+        
+
         this.shirtMesh.material.color.set(new THREE.Color(this.color));
       } else {
-        console.error('El material de la camisa no es del tipo esperado (MeshStandardMaterial).');
+        console.error(
+          'El material de la camisa no es del tipo esperado (MeshStandardMaterial).'
+        );
       }
     }
   }
 
+  guardarProducto() {
+    let color:any;
+    if (this.color === 'rgb(204, 204, 204)') {
+      color = 'Blanco'
+    } else if (this.color === 'rgb(239, 189, 78)') {
+      color = 'Amarillo'
+    } else if (this.color === 'rgb(128, 198, 112)') {
+      color = 'Verde'
+    } else if (this.color === 'rgb(114, 109, 232)') {
+      color = 'Azul'
+    } else if (this.color === 'rgb(239, 103, 78)') {
+      color = 'rojo'
+    }else if (this.color === 'rgb(53, 57, 52)') {
+      color = 'negro'
+    }
+
+    const productos = {
+      nombre: this.formGuardarProductos.get('nombre')?.value,
+      color:color,
+      descripcion: this.formGuardarProductos.get('descripcion')?.value,
+      imagen: this.formGuardarProductos.get('imagen')?.value,
+      talla: this.formGuardarProductos.get('talla')?.value,
+      tela: this.formGuardarProductos.get('tela')?.value,
+      existencias: this.formGuardarProductos.get('existencias')?.value,
+      precio: this.formGuardarProductos.get('precio')?.value,
+      torzoUrl: this.formGuardarProductos.get('torzoUrl')?.value,
+      hombroUrl: this.formGuardarProductos.get('hombroUrl')?.value,
+      pechoUrl: this.urlpecho,
+      categoria: this.formGuardarProductos.get('categoria')?.value,
+    };
+    console.log(productos);
+    this.productosServices.guardarProducto(productos).subscribe({
+      next: (r) => {
+        console.log(r);
+      },
+      error: (e) => {},
+      complete: () => {},
+    });
+  }
+
   ngOnInit() {
+    this.categoriasServices.obtenerProducto().subscribe({
+      next: (r) => {
+        console.log(r);
+        this.lstMostrarCategorias = r;
+      },
+      error: (e) => {},
+      complete: () => {},
+    })
 
     const renderer = new THREE.WebGLRenderer();
-
     renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
     document.getElementById('camisa')?.appendChild(renderer.domElement);
     // document.body.appendChild(renderer.domElement);
@@ -64,8 +145,7 @@ export class TiendaComponent implements OnInit {
     );
 
     const orbit = new OrbitControls(camera, renderer.domElement);
-    // const ax = new THREE.AxesHelper(5);
-    // scene.add(ax); // muestra las lineas
+
     camera.position.set(0, 10, 28);
     orbit.update();
 
@@ -74,16 +154,6 @@ export class TiendaComponent implements OnInit {
     scene.add(directionalLight);
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.5); // Color blanco, intensidad 0.5
     scene.add(ambientLight);
-
-    // const gui = new dat.GUI({ autoPlace: false });
-    // const config = {
-    //   color: 0x0,
-    // };
-    // gui.domElement.style.position = 'absolute';
-    // gui.domElement.style.top = '750px';
-    // gui.domElement.style.left = '830px';
-    // gui.domElement.style.width = '300px';
-    // document.body.appendChild(gui.domElement);
 
     const loader = new GLTFLoader();
     loader.load(
@@ -108,7 +178,9 @@ export class TiendaComponent implements OnInit {
       }
     );
 
-    const logopecho = new THREE.TextureLoader().load('/assets/4k-monitor-image2-1.jpg');
+    const logopecho = new THREE.TextureLoader().load(
+      '/assets/4k-monitor-image2-1.jpg'
+    );
     const logoPecho = new THREE.MeshBasicMaterial({
       map: logopecho,
       transparent: true,
@@ -157,7 +229,7 @@ export class TiendaComponent implements OnInit {
     //   '/assets/resumen-superficie-texturas-muro-piedra-hormigon-blanco_74190-8189.avif'
     // ); //imagen de fondo
 
-    scene.background = new THREE.Color(0x808080);
+    scene.background = new THREE.Color('rgb(204, 204, 204)');
 
     function animate() {
       requestAnimationFrame(animate);
@@ -168,4 +240,5 @@ export class TiendaComponent implements OnInit {
     this.shirtScene = scene;
     animate();
   }
+
 }
