@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class CategoriasService {
-  private url = environment.urlCategorias;
+  private url = environment.url;
   constructor(private HttpClient: HttpClient) {}
 
   obtenerProducto(): Observable<any[]> {

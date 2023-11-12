@@ -1,55 +1,53 @@
 <div class="container mt-4">
-    <div class="col-lg-7 mx-auto" id="contenedor-datos">
+  <div class="col-lg-7 mx-auto" id="contenedor-datos">
+    <form [formGroup]="logoForm" (ngSubmit)="GuardarLogos()">
       <div class="card text-center">
         <div class="card-header">Datos a Guardar</div>
         <div class="card-body">
           <div class="custom-file mb-3">
             <label for="floatingNombre">Seleccione un logo</label>
             <br>
-            <input type="file" class="custom-file-input" id="customFile" accept=".jpg, .jpeg, .png">
-        </div>
-          <div class="mb-3">
-            <label for="floatingNombre">Url</label>
-            <input type="text" class="form-control" id="floatingNombre" />
+            <input type="file" class="custom-file-input" id="customFile" accept=".jpg, .jpeg, .png" (change)="obtenerImagen($event)" formControlName="url">
           </div>
+          <!-- <div class="mb-3">
+            <label for="floatingNombre">Url</label>
+            <input type="text" class="form-control" id="floatingNombre"  />
+          </div> -->
           <div class="mb-3">
-            <select class="form-select" aria-label="Default select example">
+            <select class="form-select" aria-label="Default select example" formControlName="tipo">
               <option selected>Tipo de logo</option>
-              <option value="1">Hombro</option>
-              <option value="2">Brazo</option>
-              <option value="3">Pecho</option>
+              <option value="Torzo">Torzo</option>
+              <option value="Hombro">Hombro</option>
+              <option value="Espalada">Espalada</option>
             </select>
-          </div>      
+          </div>
         </div>
         <br>
         <div class="card-footer text-muted d-flex justify-content-between">
-          <button class="btn btn-outline-success">
+          <button class="btn btn-outline-success" [disabled]="logoForm.invalid">
             <i class="bi bi-floppy-fill"></i>
           </button>
         </div>
       </div>
-    </div>
-    <br>
-    <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Imagen</th>
-            <th scope="col">Tipo</th>
-            <th scope="col">Url</th>
-            <th scope="col">Opciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <img style="width: 70px; height: 70px" src="/assets/logobrazoizquierdo.jpg" class="d-block w-100" />
-            <td>Hombro</td>
-            <td>/assets/logobrazoizquierdo.jpg</td>
-            <td><button type="button" class="btn btn-danger">Eliminar</button></td>
-          </tr>
-        </tbody>
-      </table>
+    </form>
   </div>
-  
-  
+  <br>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Imagen</th>
+        <th scope="col">Tipo</th>
+        <th scope="col">Url</th>
+        <!-- <th scope="col">Opciones</th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let logo of logos">
+        <img style="width: 70px; height: 70px" src="{{logo.url}}" class="d-block w-100" />
+        <td>{{logo.tipo}}</td>
+        <td>{{logo.url}}</td>
+        <!-- <td><button type="button" class="btn btn-danger">Eliminar</button></td> -->
+      </tr>
+    </tbody>
+  </table>
+</div>
