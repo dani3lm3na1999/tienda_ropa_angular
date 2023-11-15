@@ -54,7 +54,9 @@ export class LogosComponent implements OnInit {
       error: (e) => {
         console.log(e);
       },
-      complete: () => {},
+      complete: () => {
+        this.MostrarLogos();
+      },
     })
   }
  

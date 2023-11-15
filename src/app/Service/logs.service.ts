@@ -22,4 +22,8 @@ export class LogsService {
     return this.HttpClient.get<any>(`${this.url}/logos/${tipo}`);
   }
 
+  obtenerLogoId(id:String): Observable<any> {
+    return this.HttpClient.get<any>(`${this.url}/logosid/${id}`);
+  }
+
 }
