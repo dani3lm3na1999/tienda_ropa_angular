@@ -1,6 +1,6 @@
 <div class="container mt-4">
   <div class="col-lg-7 mx-auto" id="contenedor-datos">
-    <form [formGroup]="logoForm" (ngSubmit)="GuardarLogos()">
+    <form [formGroup]="logoForm" (ngSubmit)="guardarLogos()">
       <div class="card text-center">
         <div class="card-header">Datos a Guardar</div>
         <div class="card-body">
@@ -9,16 +9,12 @@
             <br>
             <input type="file" class="custom-file-input" id="customFile" accept=".jpg, .jpeg, .png" (change)="obtenerImagen($event)" formControlName="url">
           </div>
-          <!-- <div class="mb-3">
-            <label for="floatingNombre">Url</label>
-            <input type="text" class="form-control" id="floatingNombre"  />
-          </div> -->
           <div class="mb-3">
             <select class="form-select" aria-label="Default select example" formControlName="tipo">
               <option selected>Tipo de logo</option>
               <option value="Torzo">Torzo</option>
               <option value="Hombro">Hombro</option>
-              <option value="Espalada">Espalada</option>
+              <option value="Espalda">Espalda</option>
             </select>
           </div>
         </div>

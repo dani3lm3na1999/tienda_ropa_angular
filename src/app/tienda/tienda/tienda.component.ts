@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { ProductosService } from 'src/app/Service/productos.service';
-import { FormBuilder, FormGroup ,Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LogsService } from 'src/app/Service/logs.service';
 import { CategoriasService } from 'src/app/Service/categorias.service';
 
@@ -14,14 +14,14 @@ import { CategoriasService } from 'src/app/Service/categorias.service';
 })
 export class TiendaComponent implements OnInit {
   formGuardarProductos: FormGroup;
-  urlpecho:String = "";
-  lstMostrarCategorias:any;
-  selectCategoria:any;
+  urlpecho: String = '';
+  lstMostrarCategorias: any;
+  selectCategoria: any;
   constructor(
     private fb: FormBuilder,
     private productosServices: ProductosService,
     private logoServices: LogsService,
-    private categoriasServices: CategoriasService,
+    private categoriasServices: CategoriasService
   ) {
     this.formGuardarProductos = this.fb.group({
       nombre: ['', Validators.required],
@@ -41,12 +41,17 @@ export class TiendaComponent implements OnInit {
   color: string = 'rgb(204, 204, 204)';
   shirtMesh: THREE.Mesh | undefined;
   shirtScene: THREE.Scene | undefined;
+
   elementos = [
     { imagen: '/assets/logobrazoizquierdo.jpg' },
     { imagen: '/assets/4k-monitor-image2-1.jpg' },
     { imagen: '/assets/logoespalda.webp' },
     { imagen: '/assets/logo.avif' },
   ];
+  lstLogosEspalda: any;
+  lstLogoBrazo: any;
+  lstLogoPecho: any;
+  urllogos: any;
 
   switchColor(_color: string) {
     this.color = _color;
@@ -71,8 +76,6 @@ export class TiendaComponent implements OnInit {
           }
         }
 
-        
-
         this.shirtMesh.material.color.set(new THREE.Color(this.color));
       } else {
         console.error(
@@ -83,24 +86,24 @@ export class TiendaComponent implements OnInit {
   }
 
   guardarProducto() {
-    let color:any;
+    let color: any;
     if (this.color === 'rgb(204, 204, 204)') {
-      color = 'Blanco'
+      color = 'Blanco';
     } else if (this.color === 'rgb(239, 189, 78)') {
-      color = 'Amarillo'
+      color = 'Amarillo';
     } else if (this.color === 'rgb(128, 198, 112)') {
-      color = 'Verde'
+      color = 'Verde';
     } else if (this.color === 'rgb(114, 109, 232)') {
-      color = 'Azul'
+      color = 'Azul';
     } else if (this.color === 'rgb(239, 103, 78)') {
-      color = 'rojo'
-    }else if (this.color === 'rgb(53, 57, 52)') {
-      color = 'negro'
+      color = 'rojo';
+    } else if (this.color === 'rgb(53, 57, 52)') {
+      color = 'negro';
     }
 
     const productos = {
       nombre: this.formGuardarProductos.get('nombre')?.value,
-      color:color,
+      color: color,
       descripcion: this.formGuardarProductos.get('descripcion')?.value,
       imagen: this.formGuardarProductos.get('imagen')?.value,
       talla: this.formGuardarProductos.get('talla')?.value,
@@ -122,15 +125,38 @@ export class TiendaComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  obtenerCategorias() {
     this.categoriasServices.obtenerProducto().subscribe({
       next: (r) => {
-        console.log(r);
         this.lstMostrarCategorias = r;
       },
       error: (e) => {},
       complete: () => {},
-    })
+    });
+  }
+  obtenerLogoEspalda() {
+    this.logoServices.obtenerLogo('Espalda').subscribe((e) => {
+      this.lstLogosEspalda = e;
+    });
+  }
+
+  obtenerLogoHombro() {
+    this.logoServices.obtenerLogo('Hombro').subscribe((e) => {
+      this.lstLogoBrazo = e;
+    });
+  }
+
+  obtenerLogoTorzo() {
+    this.logoServices.obtenerLogo('Torzo').subscribe((e) => {
+      this.lstLogoPecho = e;
+    });
+  }
+
+  ngOnInit() {
+    this.obtenerLogoEspalda();
+    this.obtenerLogoHombro();
+    this.obtenerLogoTorzo();
+    this.obtenerCategorias();
 
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
@@ -165,7 +191,6 @@ export class TiendaComponent implements OnInit {
             child.material.metalness = 0;
             child.material.roughness = 0.5;
             child.material.color.set(new THREE.Color('rgb(204, 204, 204)'));
-            // Guarda la referencia al mesh de la camisa
             this.shirtMesh = child;
           }
         });
@@ -177,21 +202,25 @@ export class TiendaComponent implements OnInit {
         console.error('Error al cargar el modelo:', error);
       }
     );
-
-    const logopecho = new THREE.TextureLoader().load(
-      '/assets/4k-monitor-image2-1.jpg'
+    let src = '/uploads/Nk25fw5jN__1700033137447.jpeg';
+    const loader1 = new THREE.TextureLoader();
+    loader1.setCrossOrigin('anonymous');
+    let texture = loader1.load(
+      src
     );
-    const logoPecho = new THREE.MeshBasicMaterial({
-      map: logopecho,
+
+
+    const logoPechos = new THREE.MeshBasicMaterial({
+      map: texture,
       transparent: true,
     });
     const logoGeometry = new THREE.PlaneGeometry(8, 5); // Tamaño del plano (ancho, alto)
-    const logoMesh = new THREE.Mesh(logoGeometry, logoPecho);
+    const logoMesh = new THREE.Mesh(logoGeometry, logoPechos);
     logoMesh.position.set(0, 7.2, 5.9); // Ajusta la posición según tus necesidades (izquierda o derecha, arriva abajo, fondo)
     scene.add(logoMesh);
 
     const logoTextureEspalda = new THREE.TextureLoader().load(
-      '/assets/logoespalda.webp'
+      '/uploads/Nk25fw5jN__1700033137447.jpeg'
     );
     const logoMaterialEspalda = new THREE.MeshBasicMaterial({
       map: logoTextureEspalda,
@@ -207,7 +236,7 @@ export class TiendaComponent implements OnInit {
     scene.add(logoMeshEspalda);
 
     const logoTextureHombro = new THREE.TextureLoader().load(
-      '/assets/logobrazoizquierdo.jpg'
+      '/uploads/Nk25fw5jN__1700033137447.jpeg'
     );
     const logoMaterialHombro = new THREE.MeshBasicMaterial({
       map: logoTextureHombro,
@@ -240,5 +269,4 @@ export class TiendaComponent implements OnInit {
     this.shirtScene = scene;
     animate();
   }
-
 }

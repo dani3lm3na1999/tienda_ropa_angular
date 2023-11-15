@@ -84,8 +84,8 @@
                   <div id="carouselExample1" class="carousel slide" style="width: 200px; height: 200px">
                     <label for="">Logos para pechos</label>
                     <div class="carousel-inner">
-                      <div class="carousel-item" *ngFor="let elemento of elementos; let first = first" [class.active]="first">
-                        <img style="width: 200px; height: 180px" src="{{elemento.imagen}}" class="d-block w-100" />
+                      <div class="carousel-item" *ngFor="let elemento of lstLogoPecho; let first = first" [class.active]="first">
+                        <img style="width: 200px; height: 180px" src="{{elemento.url}}" class="d-block w-100" />
                       </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample1" 
@@ -102,8 +102,8 @@
                   <div id="carouselExample2" class="carousel slide" style="width: 200px; height: 200px">
                     <label for="">Logos para espalda</label>
                     <div class="carousel-inner">
-                      <div class="carousel-item" *ngFor="let elemento of elementos; let first = first" [class.active]="first">
-                        <img style="width: 200px; height: 180px" src="{{elemento.imagen}}" class="d-block w-100"  />
+                      <div class="carousel-item" *ngFor="let elemento of lstLogosEspalda; let first = first" [class.active]="first">
+                        <img style="width: 200px; height: 180px" src="{{elemento.url}}" class="d-block w-100"  />
                       </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample2" data-bs-slide="prev" style="background-color: black">
@@ -119,8 +119,8 @@
                   <div id="carouselExample3" class="carousel slide" style="width: 200px; height: 200px">
                     <label for="">Logos para hombro</label>
                     <div class="carousel-inner">
-                      <div class="carousel-item" *ngFor="let elemento of elementos; let first = first" [class.active]="first">
-                        <img style="width: 200px; height: 180px" src="{{elemento.imagen}}" class="d-block w-100" />
+                      <div class="carousel-item" *ngFor="let elemento of lstLogoBrazo; let first = first" [class.active]="first">
+                        <img style="width: 200px; height: 180px" src="{{elemento.url}}" class="d-block w-100" />
                       </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample3" data-bs-slide="prev" style="background-color: black">
@@ -149,4 +149,6 @@
     </div>
   </div>
 </form>
+
+
 
