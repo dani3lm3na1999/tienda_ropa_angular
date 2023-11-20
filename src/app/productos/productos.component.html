@@ -1,0 +1,95 @@
+<div class="container mt-4">
+  <div class="col-lg-7 mx-auto" id="contenedor-datos">
+    <form>
+      <div class="card text-center">
+        <div class="card-header">Datos a Guardar</div>
+        <div class="card-body">
+          <div class="custom-file mb-3">
+            <label for="floatingNombre">Seleccione un logo</label>
+            <br />
+            <input
+              type="file"
+              class="custom-file-input"
+              id="customFile"
+              accept=".jpg, .jpeg, .png"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="">Seleccione una categoria</label>
+            <select
+              class="form-select"
+              aria-label="Default select example"
+              id="opciones"
+              [(ngModel)]="selectCategoria"
+              name="opciones"
+            >
+              <option
+                *ngFor="let opcion of lstMostrarCategorias"
+                [value]="opcion._id"
+              >
+                {{ opcion.nombre }}
+              </option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="">Seleccione un tipo de tela</label>
+            <select
+              class="form-select"
+              aria-label="Default select example"
+            >
+              <option value="Algodon">Algodón</option>
+              <option value="Nailon">Nailon</option>
+              <option value="Poliester">Poliéster</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="">Seleccione una talla</label>
+            <select
+              class="form-select"
+              aria-label="Default select example"
+            >
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L">L</option>
+              <option value="XL">XL</option>
+            </select>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingDescrip"
+            />
+            <label for="floatingDescrip">Descripcion</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input
+              type="number"
+              class="form-control"
+              id="floatingExistencias"
+            />
+            <label for="floatingExistencias">Existencias</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input
+              type="number"
+              class="form-control"
+              id="floatingPrecio"
+            />
+            <label for="floatingPrecio">Precio</label>
+          </div>
+        </div>
+        <br />
+        <div class="card-footer text-muted d-flex justify-content-between">
+          <button class="btn btn-outline-success">
+            <i class="bi bi-floppy-fill"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <br />
+</div>

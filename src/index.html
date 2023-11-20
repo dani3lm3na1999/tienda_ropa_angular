@@ -33,14 +33,17 @@
                   >Inicio</a
                 >
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/Tienda">Nuevo producto</a>
-              </li>
 
-              <li class="nav-item">
-                <a class="nav-link" href="/Logos">Nuevo logo</a>
-              </li>
-
+              <div class="nav-item dropdown">
+                <a class="nav-link" id="navbarDropdown">
+                  Opciones de creación
+                </a>
+                <div class="dropdown-content">
+                  <a class="dropdown-item" href="/Tienda">Nueva camisa 3D</a>
+                  <a class="dropdown-item" href="/Logos">Nuevo logo</a>
+                  <a class="dropdown-item" href="/Productos">Nuevo producto</a>
+                </div>
+              </div>
               <li class="nav-item">
                 <a class="nav-link" href="#">Acerca de</a>
               </li>
@@ -58,7 +61,6 @@
         </div>
       </nav>
     </header>
-
     <main>
       <app-root></app-root>
     </main>

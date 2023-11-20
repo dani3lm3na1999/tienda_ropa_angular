@@ -10,8 +10,8 @@
             <input type="file" class="custom-file-input" id="customFile" accept=".jpg, .jpeg, .png" (change)="obtenerImagen($event)" formControlName="url">
           </div>
           <div class="mb-3">
+            <label for="">Seleccione una parte de la camisa</label>
             <select class="form-select" aria-label="Default select example" formControlName="tipo">
-              <option selected>Tipo de logo</option>
               <option value="Torzo">Torzo</option>
               <option value="Hombro">Hombro</option>
               <option value="Espalda">Espalda</option>
@@ -29,24 +29,21 @@
   </div>
   <br>
   <div class="table-container">
-    <table class="table table-bordered">
-      <thead>
+    <table class="table table-bordered mx-auto">
+      <thead class="text-center">
         <tr>
           <th scope="col">Imagen</th>
           <th scope="col">Tipo</th>
           <th scope="col">Url</th>
-          <!-- <th scope="col">Opciones</th> -->
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let logo of logos">
-          <img style="max-width: 100px; max-height: 100px;" src="{{logo.url}}" />
+        <tr *ngFor="let logo of logos" class="text-center">
+          <td><img style="width: 100px; height: 100px;" src="{{logo.url}}" /></td>
           <td>{{logo.tipo}}</td>
           <td>{{logo.url}}</td>
-          <!-- <td><button type="button" class="btn btn-danger">Eliminar</button></td> -->
         </tr>
       </tbody>
     </table>
   </div>
-  
 </div>

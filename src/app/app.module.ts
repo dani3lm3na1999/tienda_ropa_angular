@@ -7,14 +7,14 @@ import { TiendaComponent } from './tienda/tienda/tienda.component';
 import { MenuComponent } from './menu/menu/menu.component';
 import { LogosComponent } from './logos/logos/logos.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PruevaComponent } from './prueva/prueva/prueva.component';
+import { ProductosComponent } from './productos/productos.component';
 @NgModule({
   declarations: [
     AppComponent,
     TiendaComponent,
     MenuComponent,
     LogosComponent,
-    PruevaComponent
+    ProductosComponent
   ],
   imports: [
     FormsModule,

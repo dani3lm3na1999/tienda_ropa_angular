@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { TiendaComponent } from './tienda/tienda/tienda.component';
 import { MenuComponent } from './menu/menu/menu.component';
 import { LogosComponent } from './logos/logos/logos.component';
-import { PruevaComponent } from './prueva/prueva/prueva.component';
+import { ProductosComponent } from './productos/productos.component';
 
 
 @NgModule({
@@ -19,7 +19,10 @@ import { PruevaComponent } from './prueva/prueva/prueva.component';
           path: 'Logos', component: LogosComponent, 
         },
         {
-          path: 'prueva', component: PruevaComponent, 
+          path: 'Productos', component: ProductosComponent, 
+        },
+        {
+          path: '', component: MenuComponent, 
         },
     ], {scrollPositionRestoration: 'enabled'})
 ],

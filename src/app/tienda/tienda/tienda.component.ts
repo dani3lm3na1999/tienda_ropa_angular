@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
@@ -6,6 +6,7 @@ import { ProductosService } from 'src/app/Service/productos.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LogsService } from 'src/app/Service/logs.service';
 import { CategoriasService } from 'src/app/Service/categorias.service';
+import { Renderer2 } from '@angular/core';
 
 @Component({
   selector: 'app-tienda',
@@ -21,7 +22,8 @@ export class TiendaComponent implements OnInit {
     private fb: FormBuilder,
     private productosServices: ProductosService,
     private logoServices: LogsService,
-    private categoriasServices: CategoriasService
+    private categoriasServices: CategoriasService,
+    private renderer: Renderer2
   ) {
     this.formGuardarProductos = this.fb.group({
       nombre: ['', Validators.required],
@@ -141,6 +143,7 @@ export class TiendaComponent implements OnInit {
       complete: () => {},
     });
   }
+
   obtenerLogoEspalda() {
     this.logoServices.obtenerLogo('Espalda').subscribe((e) => {
       this.lstLogosEspalda = e;
@@ -160,6 +163,7 @@ export class TiendaComponent implements OnInit {
   }
 
   obtenerUrlLogoTorzoId(id: string){
+    console.log(id)
     this.logoServices.obtenerLogoId(id).subscribe((e) => {
       this.urllogosTorzoId = e.url;
       this.cargarImagenTorzo(this.urllogosTorzoId);
@@ -297,7 +301,7 @@ export class TiendaComponent implements OnInit {
             this.shirtMesh = child;
           }
         });
-        gltf.scene.scale.set(0.5, 0.5, 0.5);
+        gltf.scene.scale.set(0.5, 0.5, 0.5);//cambia el tamaño de la camisa
         this.scenePrincipal.add(gltf.scene);
       },
       undefined,
@@ -305,10 +309,6 @@ export class TiendaComponent implements OnInit {
         console.error('Error al cargar el modelo:', error);
       }
     );
-    
-
-    
-
 
     this.scenePrincipal.background = new THREE.Color('rgb(229, 229, 229)');
 
