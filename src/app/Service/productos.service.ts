@@ -17,6 +17,10 @@ export class ProductosService {
   mostrarProductos(): Observable<any[]> {
     return this.HttpClient.get<any[]>(this.url + '/productos');
   }
+
+  mostrarProductosByCategoria(id:String): Observable<any[]> {
+    return this.HttpClient.get<any[]>(`${this.url}/productos/categoria/${id}`);
+  }
   
   obtenerProducto(): Observable<any> {
     return this.HttpClient.get(this.url + '/productos');

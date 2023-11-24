@@ -8,22 +8,24 @@ import { MenuComponent } from './menu/menu/menu.component';
 import { LogosComponent } from './logos/logos/logos.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductosComponent } from './productos/productos.component';
+import { NavbarComponent } from './navbar/navbar.component';
 @NgModule({
   declarations: [
     AppComponent,
     TiendaComponent,
     MenuComponent,
     LogosComponent,
-    ProductosComponent
+    ProductosComponent,
+    NavbarComponent
   ],
   imports: [
     FormsModule,
     ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, NavbarComponent]
 })
 export class AppModule { }

@@ -1,17 +1,39 @@
-<div class="row flex-wrap">
-    <div class="col-sm-2 mb-3" *ngFor="let elemento of elementos">
-      <div class="card">
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="text-center"><b>Bienvenidos a tu Tienda <span class="mi">MI</span><span class="nd">ND</span></b></h1>
+    </div>
+    <div class="col-lg-3">
+      <select class="form-select mb-3 fondo" aria-label="Default select example"
+        [(ngModel)]="selectCategoria" name="opciones" (change)="cargarProductosByCategoria()">
+        <option *ngFor="let opcion of lstMostrarCategorias" [value]="opcion._id">
+          {{ opcion.nombre }}
+        </option>
+      </select>
+    </div>
+    <hr>
+  </div>
+  <div class="row">
+    <div *ngFor="let producto of productos" class="col-sm-3 d-flex justify-content-between text-center mb-4">
+      <div class="card fondo">
+        <div class="card-header">
+          <label class="form-label mt-2 lbl-stock">Existencias: {{producto.existencias}}</label>
+        </div>
+        <div *ngIf="producto.categorias.nombre === 'TERMOS'" class="text-center">
+          <img src="{{producto.imagen}}" class="card-img-top img-termo" alt="{{producto.descripcion}}">
+        </div>
+        <div *ngIf="producto.categorias.nombre != 'TERMOS'" class="text-center">
+          <img src="{{producto.imagen}}" class="card-img-top" alt="{{producto.descripcion}}">
+        </div>
         <div class="card-body">
-          <h6 class="card-title">CAMISA DE ALGODON</h6>
-          <p><img style="width: 100px; height: 100px;" src="/uploads/IGPbKfBp2__1700034195792.jpeg" /></p>
-          <p class="card-text">Precio: <label for="">22.6</label></p>
-          <p class="card-text">Talla: <label for="">M</label></p>
-          <p class="card-text">Color: <label for="">Blanco</label></p>
-          <p class="card-text">Tipo de tela:<label for="">Algodon</label></p>
-          <a href="/Tienda" class="btn btn-primary" style="margin-top: 1rem;">Ver Detalles</a>
+          <h3 class="card-title"><b>{{producto.nombre}}</b></h3>
+          <p class="card-text">{{producto.descripcion}}</p>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+          <label class="form-label mt-2">$ {{producto.precio}} USD</label>          
+          <a href="#" class="btn btn-primary"><i class="bi bi-cart-plus"></i></a>
         </div>
       </div>
     </div>
-  </div> 
-  
-  
+  </div>
+</div>

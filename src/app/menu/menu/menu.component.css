@@ -1,0 +1,63 @@
+h1 {
+    font-family: 'Your Selected Font', sans-serif;
+    text-transform: uppercase;
+    font-size: 3em;
+    letter-spacing: 5px;
+    color: #333; /* Choose your desired text color */
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5); /* Adjust the shadow properties */
+}
+
+@media screen and (max-width: 768px) {
+    h1{
+        font-size: 1.5em;
+    }
+}
+
+.fondo {
+    background-color: #dbdbc4 ;
+    color:  black;
+    font-weight: bold !important;
+    box-shadow: 3px 3px 4px 3px rgb(54, 54, 54);
+}
+
+.card{
+    min-height: 38rem;
+    max-height: 38rem;
+}
+
+.input-exist{
+    max-width: 4rem;
+    background-color: #dbdbc4;
+    border: none;
+    outline: none;
+}
+
+.lbl-stock{
+    font-weight: bold !important;
+}
+
+select, option{
+    font-weight: bold !important;
+}
+
+option {
+    background-color: #e9e9b2;
+}
+
+img {    
+    width: 18rem;
+    height: 15rem;
+}
+
+.img-termo {
+    width: 8.5rem !important;
+    height: 15rem !important;
+}
+
+.mi {
+    color: black;
+}
+
+.nd {
+    color: lightgreen;
+}
