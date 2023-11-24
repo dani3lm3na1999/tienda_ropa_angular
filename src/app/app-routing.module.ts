@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { TiendaComponent } from './tienda/tienda/tienda.component';
 import { MenuComponent } from './menu/menu/menu.component';
 import { LogosComponent } from './logos/logos/logos.component';
-import { ProductosComponent } from './productos/productos.component';
 
 
 @NgModule({
@@ -12,14 +11,16 @@ import { ProductosComponent } from './productos/productos.component';
         {
             path: 'Tienda', component: TiendaComponent, 
         },
+
+        {
+          path: 'Camisa3d/:id', component: TiendaComponent, 
+        },
+
         {
           path: 'Menu', component: MenuComponent, 
         },
         {
           path: 'Logos', component: LogosComponent, 
-        },
-        {
-          path: 'Productos', component: ProductosComponent, 
         },
         {
           path: '', component: MenuComponent, 

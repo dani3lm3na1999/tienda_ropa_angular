@@ -31,7 +31,7 @@
         </div>
         <div class="card-footer d-flex justify-content-between">
           <label class="form-label mt-2">$ {{producto.precio}} USD</label>   
-          <a *ngIf="producto.categorias.nombre === 'CAMISAS 3D'" href="/Tienda" class="btn btn-info"><i class="bi bi-search-heart"></i></a>       
+          <a *ngIf="producto.categorias.nombre === 'CAMISAS 3D'" (click)="mostrarUnProductoById(producto._id)" class="btn btn-info"><i class="bi bi-search-heart"></i></a>       
           <a href="#" class="btn btn-primary"><i class="bi bi-cart-plus"></i></a>
         </div>
       </div>

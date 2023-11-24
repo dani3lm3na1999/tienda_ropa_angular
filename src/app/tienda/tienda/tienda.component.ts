@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LogsService } from 'src/app/Service/logs.service';
 import { CategoriasService } from 'src/app/Service/categorias.service';
 import html2canvas from 'html2canvas';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-tienda',
@@ -19,12 +20,15 @@ export class TiendaComponent implements OnInit {
   lstMostrarCategorias: any;
   selectCategoria: any;
   archivo:File = new File([], '');
+  idActivo:boolean = true;
 
   constructor(
     private fb: FormBuilder,
     private productosServices: ProductosService,
     private logoServices: LogsService,
-    private categoriasServices: CategoriasService
+    private categoriasServices: CategoriasService,
+    private route: ActivatedRoute,
+    private routeService:Router
   ) {
     this.formGuardarProductos = this.fb.group({
       nombre: ['', Validators.required],
@@ -64,7 +68,7 @@ export class TiendaComponent implements OnInit {
   sceneHombro = new THREE.Scene();
   sceneEspalda = new THREE.Scene();
 
-  color: string = 'rgb(250, 243, 243)';
+  color: string = 'white';
 
   switchColor(_color: string) {
     this.color = _color;
@@ -74,16 +78,21 @@ export class TiendaComponent implements OnInit {
       // Verifica que el material sea de tipo MeshStandardMaterial
       if (this.shirtMesh.material instanceof THREE.MeshStandardMaterial) {
         if (this.shirtScene) {
-          if (this.color == 'rgb(250, 243, 243)') {
-            this.shirtScene.background = new THREE.Color('rgb(229, 229, 229 )');
+          if (this.color == 'rgb(255, 255, 255)') {
+            this.shirtScene.background = new THREE.Color('white');
+
           } else if (this.color == 'rgb(239, 189, 78)') {
             this.shirtScene.background = new THREE.Color('rgb(239, 189, 78)');
+
           } else if (this.color == 'rgb(128, 198, 112)') {
             this.shirtScene.background = new THREE.Color('rgb(128, 198, 112)');
+
           } else if (this.color == 'rgb(114, 109, 232)') {
             this.shirtScene.background = new THREE.Color('rgb(114, 109, 232)');
+
           } else if (this.color == 'rgb(239, 103, 78)') {
             this.shirtScene.background = new THREE.Color('rgb(239, 103, 78)');
+
           } else if (this.color == 'rgb(53, 57, 52)') {
             this.shirtScene.background = new THREE.Color('rgb(163, 163, 163)');
           }
@@ -253,49 +262,37 @@ export class TiendaComponent implements OnInit {
     document.getElementById('camisa')?.appendChild(this.renderer.domElement);
     this.camera.position.set(0, 10, 28);
     this.orbit.update();
-
     const directionalLight = new THREE.DirectionalLight(
       new THREE.Color('rgb(255, 255, 255)'),
       0.5
     );
-
     directionalLight.position.set(0, 1, 0); // Posición de la luz
     this.scenePrincipal.add(directionalLight);
     const ambientLight = new THREE.AmbientLight(
       new THREE.Color('rgb(255, 255, 255)'),
       1.5
     ); // Color blanco, intensidad 0.5
-
     this.scenePrincipal.add(ambientLight);
     const loader = new GLTFLoader();
+    
     this.cargarImgen3d(loader);
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+    canvas.width = window.innerWidth / 2;
+    canvas.height = window.innerHeight / 2;
 
-    const gradientCanvas = document.createElement('canvas');
-    const gradientContext = gradientCanvas.getContext('2d');
-    gradientCanvas.width = window.innerWidth;
-    gradientCanvas.height = window.innerHeight;
+    const gradient = context!.createLinearGradient(0, 0, 0, canvas.height);
+    gradient.addColorStop(0, 'rgb(200, 200, 255)'); // Color intermedio (azul claro)
+    gradient.addColorStop(0.5, 'rgb(200, 200, 255)');  
+    gradient.addColorStop(0.7, 'rgb(244, 244, 244)');         // Color intermedio
+    gradient.addColorStop(1, 'rgb(255, 255, 255)'); 
 
-    const gradient = gradientContext!.createLinearGradient(0, 0, 0, gradientCanvas.height);
-    gradient.addColorStop(0, 'rgb(229, 229, 229)'); // Color inicial
-    gradient.addColorStop(1, 'white'); // Color final
+    context!.fillStyle = gradient;
+    context!.fillRect(0, 0, canvas.width, canvas.height);
 
-    gradientContext!.fillStyle = gradient;
-    gradientContext!.fillRect(0, 0, gradientCanvas.width, gradientCanvas.height);
-
-    // Usa el objeto Linear Gradient como fondo en tu escena
-    const texture = new THREE.CanvasTexture(gradientCanvas);
-    const material = new THREE.MeshBasicMaterial({ map: texture });
-
-    const planeGeometry = new THREE.PlaneGeometry(window.innerWidth, window.innerHeight);
-    const plane = new THREE.Mesh(planeGeometry, material);
-
-    // Asegúrate de que el plano esté detrás de tus objetos principales
-    plane.position.z = -1;
-
-    // Agrega el plano a tu escena
-    this.scenePrincipal.add(plane);
-
-    // this.scenePrincipal.background = new THREE.Color('rgb(229, 229, 229)');
+    // Usamos la textura del canvas como fondo
+    const texture = new THREE.CanvasTexture(canvas);
+    this.scenePrincipal.background = texture;
 
     this.shirtScene = this.scenePrincipal;
     this.animate();
@@ -345,18 +342,73 @@ export class TiendaComponent implements OnInit {
     formData.append('hombroUrl', this.urllogosBrazoId);
     formData.append('espaldaUrl', this.urllogosEspaldaId);
     formData.append('categorias',  this.selectCategoria);
-
+    // console.log(formData)
     this.productosServices.guardarProducto(formData).subscribe({
       next: (r) => {
         console.log(r);
       },
       error: (e) => {},
-      complete: () => {},
+      complete: () => {
+         this.routeService.navigate(['/Menu'])
+      },
     });
+  }
+
+  mostrarCamisa3dPorId(){
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('id');
+      this.productosServices.obtenerProductoById(id!).subscribe({
+        next: (r) => {    
+          console.log(r)
+          this.cargarImagenTorzo(r.torzoUrl)
+          this.cargarImagenHombro(r.hombroUrl)
+          this.cargarImagenEspalda(r.espaldaUrl)
+          if (this.shirtMesh) {
+            if (this.shirtMesh.material instanceof THREE.MeshStandardMaterial) {
+              if (this.shirtScene) {
+                this.shirtMesh.material.color.set(new THREE.Color(r.color));
+              }
+            }
+          }
+
+          this.formGuardarProductos.patchValue({
+            nombre: r.nombre,
+            categoria:r.categorias._id,
+            tela:r.tela,
+            talla:r.talla,
+            descripcion:r.descripcion,
+            existencias:r.existencias,
+            precio:r.precio
+          })
+          this.idActivo = false
+        },
+        error: (e) => {
+          console.log(e)
+        },
+        complete: () => {},
+      });
+  })
+  }
+
+  eliminarProducto(){
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('id');
+      this.productosServices.eliminarProductoById(id!).subscribe({
+        next: (r) => {},
+        error: (e) => {
+          console.log(e)
+        },
+        complete: () => {
+          this.routeService.navigate(['/Menu'])
+        },
+      });
+  })
+    
   }
 
   ngOnInit() {
     this.cargarImgen3dAdiv();
+    this.mostrarCamisa3dPorId();
     this.obtenerLogoEspalda();
     this.obtenerLogoHombro();
     this.obtenerLogoTorzo();

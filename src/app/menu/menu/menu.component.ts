@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CategoriasService } from 'src/app/Service/categorias.service';
 import { ProductosService } from 'src/app/Service/productos.service';
 
@@ -16,6 +17,7 @@ export class MenuComponent implements OnInit {
   constructor(
     private productoService: ProductosService,
     private categoriasServices: CategoriasService,
+    private routeService:Router
   ){}
 
   ngOnInit(): void {
@@ -41,6 +43,18 @@ export class MenuComponent implements OnInit {
         this.lstMostrarCategorias = r;
       },
       error: (e) => {},
+      complete: () => {},
+    });
+  }
+
+  mostrarUnProductoById(id:string){
+    this.productoService.obtenerProductoById(id).subscribe({
+      next: (r) => {
+        this.routeService.navigate(['/Camisa3d/'+r._id])
+      },
+      error: (e) => {
+        console.log(e)
+      },
       complete: () => {},
     });
   }

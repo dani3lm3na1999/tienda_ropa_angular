@@ -22,9 +22,13 @@ export class ProductosService {
     return this.HttpClient.get<any[]>(`${this.url}/productos/categoria/${id}`);
   }
   
-  obtenerProducto(): Observable<any> {
-    return this.HttpClient.get(this.url + '/productos');
+  obtenerProductoById(id:string): Observable<any> {
+    return this.HttpClient.get(this.url + '/productos/id/'+id);
   }
 
+  eliminarProductoById(id: string): Observable<any> {
+    return this.HttpClient.delete(this.url + '/productos/eliminar/id/' + id, { responseType: 'text' });
+  }
+  
   
 }

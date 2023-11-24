@@ -5,12 +5,12 @@
         <div class="row" id="camisa"></div>
         <div class="row">
           <div class="col" id="colores">
-            <button class="circular-button gray" (click)="switchColor('rgb(250, 243, 243)')"></button>
-            <button class="circular-button yellow" (click)="switchColor('rgb(239, 189, 78)')"></button>
-            <button class="circular-button green" (click)="switchColor('rgb(128, 198, 112)')"></button>
-            <button class="circular-button blueviolet" (click)="switchColor('rgb(114, 109, 232)')"></button>
-            <button class="circular-button red" (click)="switchColor('rgb(239, 103, 78)')"></button>
-            <button class="circular-button black" (click)="switchColor('rgb(53, 57, 52)')"></button>
+            <button class="circular-button gray" (click)="switchColor('white')"  [attr.disabled]="idActivo ? null : true"></button>
+            <button class="circular-button yellow" (click)="switchColor('yellow')"  [attr.disabled]="idActivo ? null : true"></button>
+            <button class="circular-button green" (click)="switchColor('green')"  [attr.disabled]="idActivo ? null : true"></button>
+            <button class="circular-button blueviolet" (click)="switchColor('blueviolet')"  [attr.disabled]="idActivo ? null : true"></button>
+            <button class="circular-button red" (click)="switchColor('red')"  [attr.disabled]="idActivo ? null : true"></button>
+            <button class="circular-button black" (click)="switchColor('black')"  [attr.disabled]="idActivo ? null : true"></button>
           </div>
         </div>
       </div>
@@ -19,12 +19,12 @@
           <div class="card-header">Datos a Guardar</div>
           <div class="card-body">
             <div class="form-floating mb-3">
-              <input type="text" class="form-control" id="floatingnombre" formControlName="nombre" />
+              <input type="text" class="form-control" id="floatingnombre" formControlName="nombre"  [attr.disabled]="idActivo ? null : true"/>
               <label for="floatingnombre">Nombre</label>
             </div>
             <div class="form-floating mb-3">
               <select class="form-select" aria-label="Floating label select example" formControlName="categoria"
-                id="floatingCategorias" [(ngModel)]="selectCategoria" name="opciones">
+                id="floatingCategorias" [(ngModel)]="selectCategoria" name="opciones"  [attr.disabled]="idActivo ? null : true">
                 <option *ngFor="let opcion of lstMostrarCategorias" [value]="opcion._id">
                   {{ opcion.nombre }}
                 </option>
@@ -33,7 +33,7 @@
             </div>
             <div class="form-floating mb-3">
               <select class="form-select" aria-label="Default select example" formControlName="tela"
-              id="floatingTela">
+              id="floatingTela"  [attr.disabled]="idActivo ? null : true">
                 <option value="Algodon">Algodón</option>
                 <option value="Nailon">Nailon</option>
                 <option value="Poliester">Poliéster</option>
@@ -42,7 +42,7 @@
             </div>
             <div class="form-floating mb-3">              
               <select class="form-select" aria-label="Default select example" formControlName="talla"
-              id="floatingTalla">
+              id="floatingTalla"  [attr.disabled]="idActivo ? null : true">
                 <option value="S">S</option>
                 <option value="M">M</option>
                 <option value="L">L</option>
@@ -51,15 +51,15 @@
               <label for="floatingTalla">Seleccione una talla</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="text" class="form-control" id="floatingDescrip" formControlName="descripcion" />
+              <input type="text" class="form-control" id="floatingDescrip" formControlName="descripcion"   [attr.disabled]="idActivo ? null : true"/>
               <label class="form-label" for="floatingDescrip">Descripcion</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="number" class="form-control" id="floatingExistencias" formControlName="existencias" />
+              <input type="number" class="form-control" id="floatingExistencias" formControlName="existencias"   [attr.disabled]="idActivo ? null : true"/>
               <label for="floatingExistencias">Existencias</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="number" class="form-control" id="floatingPrecio" formControlName="precio" />
+              <input type="number" class="form-control" id="floatingPrecio" formControlName="precio"   [attr.disabled]="idActivo ? null : true"/>
               <label for="floatingPrecio">Precio</label>
             </div>
 
@@ -75,12 +75,12 @@
 
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample1"
                           data-bs-slide="prev" style="background-color: black"
-                          (click)="obtenerUrlLogoTorzoId(elemento._id)">
+                          (click)="obtenerUrlLogoTorzoId(elemento._id)"   [attr.disabled]="idActivo ? null : true">
                           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         </button>
                         <button class="carousel-control-next" type="button" data-bs-target="#carouselExample1"
                           data-bs-slide="next" style="background-color: black"
-                          (click)="obtenerUrlLogoTorzoId(elemento._id)">
+                          (click)="obtenerUrlLogoTorzoId(elemento._id)"   [attr.disabled]="idActivo ? null : true">
                           <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         </button>
                       </div>
@@ -100,12 +100,12 @@
 
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample2"
                           data-bs-slide="prev" style="background-color: black"
-                          (click)="obtenerUrlLogoEspaldId(elemento._id)">
+                          (click)="obtenerUrlLogoEspaldId(elemento._id)"  [attr.disabled]="idActivo ? null : true">
                           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         </button>
                         <button class="carousel-control-next" type="button" data-bs-target="#carouselExample2"
                           data-bs-slide="next" style="background-color: black"
-                          (click)="obtenerUrlLogoEspaldId(elemento._id)">
+                          (click)="obtenerUrlLogoEspaldId(elemento._id)"  [attr.disabled]="idActivo ? null : true">
                           <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         </button>
                       </div>
@@ -124,12 +124,12 @@
 
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample3"
                           data-bs-slide="prev" style="background-color: black"
-                          (click)="obtenerUrlLogoHombroId(elemento._id)">
-                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          (click)="obtenerUrlLogoHombroId(elemento._id)"  [attr.disabled]="idActivo ? null : true">
+                          <span class="carousel-control-prev-icon" aria-hidden="true" ></span>
                         </button>
                         <button class="carousel-control-next" type="button" data-bs-target="#carouselExample3"
                           data-bs-slide="next" style="background-color: black"
-                          (click)="obtenerUrlLogoHombroId(elemento._id)">
+                          (click)="obtenerUrlLogoHombroId(elemento._id)"  [attr.disabled]="idActivo ? null : true">
                           <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         </button>
                       </div>
@@ -142,11 +142,12 @@
           </div>
           <br />
           <div class="card-footer text-muted d-flex justify-content-between">
-            <button class="btn btn-outline-success" (click)="guardarProducto()">
+            <button class="btn btn-outline-success" (click)="guardarProducto()" [attr.disabled]="idActivo ? null : true">
               <i class="bi bi-floppy-fill"></i>
             </button>
-            <button class="btn btn-outline-info" (click)="captureScreen()">
-              <i class="bi bi-download"></i>
+
+            <button class="btn btn-outline-danger" (click)="eliminarProducto()" [disabled]="idActivo == true">
+              <i class="bi bi-trash3"></i>
             </button>
           </div>
         </div>
