@@ -10,8 +10,8 @@ export class ProductosService {
   private url = environment.url;
   constructor(private HttpClient: HttpClient) {}
 
-  guardarProducto(productos: any): Observable<any> {
-    return this.HttpClient.post(this.url + '/productos', productos);
+  guardarProducto(productos: FormData): Observable<any> {
+    return this.HttpClient.post(`${this.url}/productos`, productos);
   }
   
   mostrarProductos(): Observable<any[]> {

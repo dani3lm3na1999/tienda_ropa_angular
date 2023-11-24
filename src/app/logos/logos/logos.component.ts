@@ -10,7 +10,7 @@ import { LogsService } from 'src/app/Service/logs.service';
 export class LogosComponent implements OnInit {
   logos: any[] = [];
   logoForm: FormGroup;
-  archivo:File = new File([], '');;
+  archivo:File = new File([], '');
 
   constructor(
     private _builder: FormBuilder,
@@ -45,7 +45,6 @@ export class LogosComponent implements OnInit {
     const formData = new FormData();
     formData.append('url', this.archivo);
     formData.append('tipo', this.logoForm.get('tipo')?.value);
-    console.log(this.logoForm.get('tipo')?.value)
 
     this.logoService.guardarLogo(formData).subscribe({
       next: (r) => {
