@@ -346,7 +346,7 @@ export class TiendaComponent implements OnInit {
       next: (r) => { },
       error: (e) => {},
       complete: () => {
-        //  this.routeService.navigate(['/Menu'])
+         this.routeService.navigate(['/Menu'])
       },
     });
   }
