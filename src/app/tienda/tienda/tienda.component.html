@@ -1,169 +1,87 @@
 <form [formGroup]="formGuardarProductos">
   <div class="container mt-4">
     <div class="row">
-      <div class="col-lg-5" id="contendor-camisa">
+      <div class="col-lg-5 mb-4" id="contendor-camisa">
         <div class="row" id="camisa"></div>
         <div class="row">
           <div class="col" id="colores">
-            <button
-              class="circular-button gray"
-              (click)="switchColor('rgb(250, 243, 243)')"
-            ></button>
-            <button
-              class="circular-button yellow"
-              (click)="switchColor('rgb(239, 189, 78)')"
-            ></button>
-            <button
-              class="circular-button green"
-              (click)="switchColor('rgb(128, 198, 112)')"
-            ></button>
-            <button
-              class="circular-button blueviolet"
-              (click)="switchColor('rgb(114, 109, 232)')"
-            ></button>
-            <button
-              class="circular-button red"
-              (click)="switchColor('rgb(239, 103, 78)')"
-            ></button>
-            <button
-              class="circular-button black"
-              (click)="switchColor('rgb(53, 57, 52)')"
-            ></button>
+            <button class="circular-button gray" (click)="switchColor('rgb(250, 243, 243)')"></button>
+            <button class="circular-button yellow" (click)="switchColor('rgb(239, 189, 78)')"></button>
+            <button class="circular-button green" (click)="switchColor('rgb(128, 198, 112)')"></button>
+            <button class="circular-button blueviolet" (click)="switchColor('rgb(114, 109, 232)')"></button>
+            <button class="circular-button red" (click)="switchColor('rgb(239, 103, 78)')"></button>
+            <button class="circular-button black" (click)="switchColor('rgb(53, 57, 52)')"></button>
           </div>
         </div>
       </div>
-      <div class="col-lg-7" id="contenedor-datos">
+      <div class="col-lg-7 mb-4" id="contenedor-datos">
         <div class="card text-center">
           <div class="card-header">Datos a Guardar</div>
           <div class="card-body">
-            <div class="mb-3">
-              <div class="form-floating mb-3">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="floatingnombre"
-                  formControlName="nombre"
-                />
-                <label for="floatingnombre">Nombre</label>
-              </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="floatingnombre" formControlName="nombre" />
+              <label for="floatingnombre">Nombre</label>
             </div>
-            <div class="mb-3">
-              <label for="">Seleccione una categoria</label>
-              <select 
-                class="form-select"
-                aria-label="Default select example"
-                formControlName="categoria"
-                id="opciones"
-                [(ngModel)]="selectCategoria"
-                name="opciones"
-              >
-                <option
-                  *ngFor="let opcion of lstMostrarCategorias"
-                  [value]="opcion._id"
-                >
+            <div class="form-floating mb-3">
+              <select class="form-select" aria-label="Floating label select example" formControlName="categoria"
+                id="floatingCategorias" [(ngModel)]="selectCategoria" name="opciones">
+                <option *ngFor="let opcion of lstMostrarCategorias" [value]="opcion._id">
                   {{ opcion.nombre }}
                 </option>
               </select>
+              <label for="floatingCategorias">Seleccione una categoria</label>
             </div>
-            <div class="mb-3">
-              <label for="">Seleccione un tipo de tela</label>
-              <select
-                class="form-select"
-                aria-label="Default select example"
-                formControlName="tela"
-              >
+            <div class="form-floating mb-3">
+              <select class="form-select" aria-label="Default select example" formControlName="tela"
+              id="floatingTela">
                 <option value="Algodon">Algodón</option>
                 <option value="Nailon">Nailon</option>
                 <option value="Poliester">Poliéster</option>
               </select>
+              <label for="floatingTela">Seleccione un tipo de tela</label>
             </div>
-            <div class="mb-3">
-              <label for="">Seleccione una talla</label>
-              <select
-                class="form-select"
-                aria-label="Default select example"
-                formControlName="talla"
-              >
+            <div class="form-floating mb-3">              
+              <select class="form-select" aria-label="Default select example" formControlName="talla"
+              id="floatingTalla">
                 <option value="S">S</option>
                 <option value="M">M</option>
                 <option value="L">L</option>
                 <option value="XL">XL</option>
               </select>
+              <label for="floatingTalla">Seleccione una talla</label>
             </div>
             <div class="form-floating mb-3">
-              <input
-                type="text"
-                class="form-control"
-                id="floatingDescrip"
-                formControlName="descripcion"
-              />
-              <label for="floatingDescrip">Descripcion</label>
+              <input type="text" class="form-control" id="floatingDescrip" formControlName="descripcion" />
+              <label class="form-label" for="floatingDescrip">Descripcion</label>
             </div>
             <div class="form-floating mb-3">
-              <input
-                type="number"
-                class="form-control"
-                id="floatingExistencias"
-                formControlName="existencias"
-              />
+              <input type="number" class="form-control" id="floatingExistencias" formControlName="existencias" />
               <label for="floatingExistencias">Existencias</label>
             </div>
             <div class="form-floating mb-3">
-              <input
-                type="number"
-                class="form-control"
-                id="floatingPrecio"
-                formControlName="precio"
-              />
+              <input type="number" class="form-control" id="floatingPrecio" formControlName="precio" />
               <label for="floatingPrecio">Precio</label>
             </div>
 
             <div class="row">
               <div class="col" id="colores">
                 <div class="custom-file" style="margin-right: 1rem">
-                  <div
-                    id="carouselExample1"
-                    class="carousel slide"
-                    style="width: 200px; height: 200px"
-                  >
+                  <div id="carouselExample1" class="carousel slide" style="width: 200px; height: 200px">
                     <label for="">Logos para torzo</label>
                     <div class="carousel-inner">
-                      <div
-                        class="carousel-item"
-                        *ngFor="let elemento of lstLogoPecho; let i = index"
-                        [class.active]="i === 0"
-                      >
-                        <img
-                          style="width: 200px; height: 180px"
-                          src="{{ elemento.url }}"
-                          class="d-block w-100"
-                        />
+                      <div class="carousel-item" *ngFor="let elemento of lstLogoPecho; let i = index"
+                        [class.active]="i === 0">
+                        <img style="width: 200px; height: 180px" src="{{ elemento.url }}" class="d-block w-100" />
 
-                        <button
-                          class="carousel-control-prev"
-                          type="button"
-                          data-bs-target="#carouselExample1"
-                          data-bs-slide="prev"
-                          style="background-color: black"
-                          (click)="obtenerUrlLogoTorzoId(elemento._id)"
-                        >
-                          <span
-                            class="carousel-control-prev-icon"
-                            aria-hidden="true"
-                          ></span>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample1"
+                          data-bs-slide="prev" style="background-color: black"
+                          (click)="obtenerUrlLogoTorzoId(elemento._id)">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         </button>
-                        <button
-                          class="carousel-control-next"
-                          type="button"
-                          data-bs-target="#carouselExample1"
-                          data-bs-slide="next"
-                          style="background-color: black"
-                          (click)="obtenerUrlLogoTorzoId(elemento._id)"
-                        >
-                          <span
-                            class="carousel-control-next-icon"
-                            aria-hidden="true"
-                          ></span>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample1"
+                          data-bs-slide="next" style="background-color: black"
+                          (click)="obtenerUrlLogoTorzoId(elemento._id)">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         </button>
                       </div>
                     </div>
@@ -171,107 +89,52 @@
                 </div>
 
                 <div class="custom-file" style="margin-right: 1rem">
-                  <div
-                    id="carouselExample2"
-                    class="carousel slide"
-                    style="width: 200px; height: 200px"
-                  >
+                  <div id="carouselExample2" class="carousel slide" style="width: 200px; height: 200px">
                     <label for="">Logos para espalda</label>
                     <div class="carousel-inner">
-                      <div
-                        class="carousel-item"
-                        *ngFor="
+                      <div class="carousel-item" *ngFor="
                           let elemento of lstLogosEspalda;
                           let first = first
-                        "
-                        [class.active]="first"
-                      >
-                        <img
-                          style="width: 200px; height: 180px"
-                          src="{{ elemento.url }}"
-                          class="d-block w-100"
-                        />
+                        " [class.active]="first">
+                        <img style="width: 200px; height: 180px" src="{{ elemento.url }}" class="d-block w-100" />
 
-                        <button
-                      class="carousel-control-prev"
-                      type="button"
-                      data-bs-target="#carouselExample2"
-                      data-bs-slide="prev"
-                      style="background-color: black"
-                      (click)="obtenerUrlLogoEspaldId(elemento._id)"
-                    >
-                      <span
-                        class="carousel-control-prev-icon"
-                        aria-hidden="true"
-                      ></span>
-                    </button>
-                    <button
-                      class="carousel-control-next"
-                      type="button"
-                      data-bs-target="#carouselExample2"
-                      data-bs-slide="next"
-                      style="background-color: black"
-                      (click)="obtenerUrlLogoEspaldId(elemento._id)"
-                    >
-                      <span
-                        class="carousel-control-next-icon"
-                        aria-hidden="true"
-                      ></span>
-                    </button>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample2"
+                          data-bs-slide="prev" style="background-color: black"
+                          (click)="obtenerUrlLogoEspaldId(elemento._id)">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample2"
+                          data-bs-slide="next" style="background-color: black"
+                          (click)="obtenerUrlLogoEspaldId(elemento._id)">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        </button>
                       </div>
                     </div>
-                    
+
                   </div>
                 </div>
 
                 <div class="custom-file" style="margin-right: 1rem">
-                  <div
-                    id="carouselExample3"
-                    class="carousel slide"
-                    style="width: 200px; height: 200px"
-                  >
+                  <div id="carouselExample3" class="carousel slide" style="width: 200px; height: 200px">
                     <label for="">Logos para hombro</label>
                     <div class="carousel-inner">
-                      <div
-                        class="carousel-item"
-                        *ngFor="let elemento of lstLogoBrazo; let first = first"
-                        [class.active]="first"
-                      >
-                        <img
-                          style="width: 200px; height: 180px"
-                          src="{{ elemento.url }}"
-                          class="d-block w-100"
-                        />
+                      <div class="carousel-item" *ngFor="let elemento of lstLogoBrazo; let first = first"
+                        [class.active]="first">
+                        <img style="width: 200px; height: 180px" src="{{ elemento.url }}" class="d-block w-100" />
 
-                        <button
-                        class="carousel-control-prev"
-                        type="button"
-                        data-bs-target="#carouselExample3"
-                        data-bs-slide="prev"
-                        style="background-color: black"
-                        (click)="obtenerUrlLogoHombroId(elemento._id)"
-                      >
-                        <span
-                          class="carousel-control-prev-icon"
-                          aria-hidden="true"
-                        ></span>
-                      </button>
-                      <button
-                        class="carousel-control-next"
-                        type="button"
-                        data-bs-target="#carouselExample3"
-                        data-bs-slide="next"
-                        style="background-color: black"
-                        (click)="obtenerUrlLogoHombroId(elemento._id)"
-                      >
-                        <span
-                          class="carousel-control-next-icon"
-                          aria-hidden="true"
-                        ></span>
-                      </button>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample3"
+                          data-bs-slide="prev" style="background-color: black"
+                          (click)="obtenerUrlLogoHombroId(elemento._id)">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample3"
+                          data-bs-slide="next" style="background-color: black"
+                          (click)="obtenerUrlLogoHombroId(elemento._id)">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        </button>
                       </div>
                     </div>
-                  
+
                   </div>
                 </div>
               </div>

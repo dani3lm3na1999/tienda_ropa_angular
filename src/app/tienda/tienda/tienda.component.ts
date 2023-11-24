@@ -253,20 +253,49 @@ export class TiendaComponent implements OnInit {
     document.getElementById('camisa')?.appendChild(this.renderer.domElement);
     this.camera.position.set(0, 10, 28);
     this.orbit.update();
+
     const directionalLight = new THREE.DirectionalLight(
       new THREE.Color('rgb(255, 255, 255)'),
       0.5
     );
+
     directionalLight.position.set(0, 1, 0); // Posición de la luz
     this.scenePrincipal.add(directionalLight);
     const ambientLight = new THREE.AmbientLight(
       new THREE.Color('rgb(255, 255, 255)'),
       1.5
     ); // Color blanco, intensidad 0.5
+
     this.scenePrincipal.add(ambientLight);
     const loader = new GLTFLoader();
     this.cargarImgen3d(loader);
-    this.scenePrincipal.background = new THREE.Color('rgb(229, 229, 229)');
+
+    const gradientCanvas = document.createElement('canvas');
+    const gradientContext = gradientCanvas.getContext('2d');
+    gradientCanvas.width = window.innerWidth;
+    gradientCanvas.height = window.innerHeight;
+
+    const gradient = gradientContext!.createLinearGradient(0, 0, 0, gradientCanvas.height);
+    gradient.addColorStop(0, 'rgb(229, 229, 229)'); // Color inicial
+    gradient.addColorStop(1, 'white'); // Color final
+
+    gradientContext!.fillStyle = gradient;
+    gradientContext!.fillRect(0, 0, gradientCanvas.width, gradientCanvas.height);
+
+    // Usa el objeto Linear Gradient como fondo en tu escena
+    const texture = new THREE.CanvasTexture(gradientCanvas);
+    const material = new THREE.MeshBasicMaterial({ map: texture });
+
+    const planeGeometry = new THREE.PlaneGeometry(window.innerWidth, window.innerHeight);
+    const plane = new THREE.Mesh(planeGeometry, material);
+
+    // Asegúrate de que el plano esté detrás de tus objetos principales
+    plane.position.z = -1;
+
+    // Agrega el plano a tu escena
+    this.scenePrincipal.add(plane);
+
+    // this.scenePrincipal.background = new THREE.Color('rgb(229, 229, 229)');
 
     this.shirtScene = this.scenePrincipal;
     this.animate();
@@ -303,22 +332,6 @@ export class TiendaComponent implements OnInit {
 
   async guardarProducto() {
     await this.captureScreen();
-    console.log(this.archivo);
-    let color: any;
-    // if (this.color === 'rgb(250, 243, 243)') {
-    //   color = 'Blanco';
-    // } else if (this.color === 'rgb(239, 189, 78)') {
-    //   color = 'Amarillo';
-    // } else if (this.color === 'rgb(128, 198, 112)') {
-    //   color = 'Verde';
-    // } else if (this.color === 'rgb(114, 109, 232)') {
-    //   color = 'Azul';
-    // } else if (this.color === 'rgb(239, 103, 78)') {
-    //   color = 'rojo';
-    // } else if (this.color === 'rgb(53, 57, 52)') {
-    //   color = 'negro';
-    // }
-
     const formData = new FormData();
     formData.append('nombre', this.formGuardarProductos.get('nombre')?.value);
     formData.append('color', this.color);
@@ -333,14 +346,6 @@ export class TiendaComponent implements OnInit {
     formData.append('espaldaUrl', this.urllogosEspaldaId);
     formData.append('categorias',  this.selectCategoria);
 
-    const url = formData.get('url');
-
-    if(url instanceof File){
-      console.log('Nombre del archivo:', url.name);
-      console.log('Tipo de archivo:', url.type);
-      console.log('Tamaño del archivo:', url.size, 'bytes');
-    }
-    // console.log(formData)
     this.productosServices.guardarProducto(formData).subscribe({
       next: (r) => {
         console.log(r);
