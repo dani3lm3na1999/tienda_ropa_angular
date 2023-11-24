@@ -21,8 +21,9 @@ h1 {
 }
 
 .card{
-    min-height: 38rem;
-    max-height: 38rem;
+    min-height: 36rem;
+    max-height: 36rem;
+    font-size: 0.85em;
 }
 
 .input-exist{

@@ -301,28 +301,29 @@ export class TiendaComponent implements OnInit {
     this.archivo = this.base64toFile(screenshotURL, fileName, mimeType);
   }
 
-  guardarProducto() {
+  async guardarProducto() {
+    await this.captureScreen();
     console.log(this.archivo);
     let color: any;
-    if (this.color === 'rgb(250, 243, 243)') {
-      color = 'Blanco';
-    } else if (this.color === 'rgb(239, 189, 78)') {
-      color = 'Amarillo';
-    } else if (this.color === 'rgb(128, 198, 112)') {
-      color = 'Verde';
-    } else if (this.color === 'rgb(114, 109, 232)') {
-      color = 'Azul';
-    } else if (this.color === 'rgb(239, 103, 78)') {
-      color = 'rojo';
-    } else if (this.color === 'rgb(53, 57, 52)') {
-      color = 'negro';
-    }
+    // if (this.color === 'rgb(250, 243, 243)') {
+    //   color = 'Blanco';
+    // } else if (this.color === 'rgb(239, 189, 78)') {
+    //   color = 'Amarillo';
+    // } else if (this.color === 'rgb(128, 198, 112)') {
+    //   color = 'Verde';
+    // } else if (this.color === 'rgb(114, 109, 232)') {
+    //   color = 'Azul';
+    // } else if (this.color === 'rgb(239, 103, 78)') {
+    //   color = 'rojo';
+    // } else if (this.color === 'rgb(53, 57, 52)') {
+    //   color = 'negro';
+    // }
 
     const formData = new FormData();
     formData.append('nombre', this.formGuardarProductos.get('nombre')?.value);
-    formData.append('color', color);
+    formData.append('color', this.color);
     formData.append('descripcion', this.formGuardarProductos.get('descripcion')?.value);
-    formData.append('imagen', this.archivo);
+    formData.append('url', this.archivo);
     formData.append('talla', this.formGuardarProductos.get('talla')?.value);
     formData.append('tela', this.formGuardarProductos.get('tela')?.value,);
     formData.append('existencias', this.formGuardarProductos.get('existencias')?.value);
@@ -330,9 +331,16 @@ export class TiendaComponent implements OnInit {
     formData.append('torzoUrl', this.urllogosTorzoId);
     formData.append('hombroUrl', this.urllogosBrazoId);
     formData.append('espaldaUrl', this.urllogosEspaldaId);
-    formData.append('categoria',  this.selectCategoria);
+    formData.append('categorias',  this.selectCategoria);
 
-    console.log(formData)
+    const url = formData.get('url');
+
+    if(url instanceof File){
+      console.log('Nombre del archivo:', url.name);
+      console.log('Tipo de archivo:', url.type);
+      console.log('Tamaño del archivo:', url.size, 'bytes');
+    }
+    // console.log(formData)
     this.productosServices.guardarProducto(formData).subscribe({
       next: (r) => {
         console.log(r);
