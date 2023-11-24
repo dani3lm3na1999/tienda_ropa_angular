@@ -342,14 +342,11 @@ export class TiendaComponent implements OnInit {
     formData.append('hombroUrl', this.urllogosBrazoId);
     formData.append('espaldaUrl', this.urllogosEspaldaId);
     formData.append('categorias',  this.selectCategoria);
-    // console.log(formData)
     this.productosServices.guardarProducto(formData).subscribe({
-      next: (r) => {
-        console.log(r);
-      },
+      next: (r) => { },
       error: (e) => {},
       complete: () => {
-         this.routeService.navigate(['/Menu'])
+        //  this.routeService.navigate(['/Menu'])
       },
     });
   }
@@ -359,7 +356,6 @@ export class TiendaComponent implements OnInit {
       const id = params.get('id');
       this.productosServices.obtenerProductoById(id!).subscribe({
         next: (r) => {    
-          console.log(r)
           this.cargarImagenTorzo(r.torzoUrl)
           this.cargarImagenHombro(r.hombroUrl)
           this.cargarImagenEspalda(r.espaldaUrl)
