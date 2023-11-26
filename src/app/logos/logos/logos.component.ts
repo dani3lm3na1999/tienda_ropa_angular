@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LogsService } from 'src/app/Service/logs.service';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-logos',
@@ -48,10 +50,18 @@ export class LogosComponent implements OnInit {
 
     this.logoService.guardarLogo(formData).subscribe({
       next: (r) => {
-        console.log(r);
+        Swal.fire({
+          icon: "success",
+          title: "Guardado",
+          text: "El logo se guardo de manera correcta!"
+        });
       },
       error: (e) => {
-        console.log(e);
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Ocurrio un erro al guardar el logo!"
+        });
       },
       complete: () => {
         this.MostrarLogos();
