@@ -8,6 +8,7 @@ import { LogsService } from 'src/app/Service/logs.service';
 import { CategoriasService } from 'src/app/Service/categorias.service';
 import html2canvas from 'html2canvas';
 import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-tienda',
@@ -110,7 +111,13 @@ export class TiendaComponent implements OnInit {
   obtenerCategorias() {
     this.categoriasServices.obtenerProducto().subscribe({
       next: (r) => {
-        this.lstMostrarCategorias = r;
+        const lista: any[] = []
+        r.forEach(e=>{
+          if(e.nombre === 'CAMISAS 3D'){
+            lista.push(e)
+          }
+        })
+        this.lstMostrarCategorias = lista;
       },
       error: (e) => {},
       complete: () => {},
@@ -344,8 +351,19 @@ export class TiendaComponent implements OnInit {
     formData.append('categorias',  this.selectCategoria);
     this.productosServices.guardarProducto(formData).subscribe({
       next: (r) => { },
-      error: (e) => {},
+      error: (e) => {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Ocurrio un erro al guardar el producto!"
+        });
+      },
       complete: () => {
+        Swal.fire({
+          icon: "success",
+          title: "Guardado",
+          text: "El producto se guardo de manera correcta!"
+        });
          this.routeService.navigate(['/Menu'])
       },
     });
@@ -387,18 +405,45 @@ export class TiendaComponent implements OnInit {
   }
 
   eliminarProducto(){
+    Swal.fire({
+      title: "¿Desea eliminar este producto?",
+      showDenyButton: true,
+      confirmButtonText: "Si",
+      denyButtonText: `No`
+    }).then((result) => {
+      if (result.isConfirmed) {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       this.productosServices.eliminarProductoById(id!).subscribe({
         next: (r) => {},
         error: (e) => {
-          console.log(e)
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Ocurrio un erro al guardar el logo!"
+          });
         },
         complete: () => {
+          Swal.fire({
+            icon: "success",
+            title: "Eliminado",
+            text: "El producto se ha eliminado satisfactoriamente!"
+          });
           this.routeService.navigate(['/Menu'])
         },
       });
   })
+
+      } else if (result.isDenied) {
+        Swal.fire({
+          icon: "info",
+          title: "Operacion cancelada",
+          text: "El usuario cancelo la eliminacion del producto"
+        });
+      }
+    });
+
+
     
   }
 

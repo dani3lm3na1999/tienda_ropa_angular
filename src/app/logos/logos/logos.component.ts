@@ -49,13 +49,7 @@ export class LogosComponent implements OnInit {
     formData.append('tipo', this.logoForm.get('tipo')?.value);
 
     this.logoService.guardarLogo(formData).subscribe({
-      next: (r) => {
-        Swal.fire({
-          icon: "success",
-          title: "Guardado",
-          text: "El logo se guardo de manera correcta!"
-        });
-      },
+      next: (r) => {},
       error: (e) => {
         Swal.fire({
           icon: "error",
@@ -65,6 +59,11 @@ export class LogosComponent implements OnInit {
       },
       complete: () => {
         this.MostrarLogos();
+        Swal.fire({
+          icon: "success",
+          title: "Guardado",
+          text: "El logo se guardo de manera correcta!"
+        });
       },
     })
   }
