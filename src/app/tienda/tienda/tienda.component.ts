@@ -138,12 +138,15 @@ export class TiendaComponent implements OnInit {
 
   obtenerLogoTorzo() {
     this.logoServices.obtenerLogo('Torzo').subscribe((e) => {
+      e.forEach(item => {
+        item.url = `https://tienda-mind-api.onrender.com${item.url}`;
+      });
       this.lstLogoPecho = e;
     });
   }
 
   obtenerUrlLogoTorzoId(id: string) {
-    this.logoServices.obtenerLogoId(id).subscribe((e) => {
+    this.logoServices.obtenerLogoId(id).subscribe((e) => {      
       this.urllogosTorzoId = e.url;
       this.cargarImagenTorzo(this.urllogosTorzoId);
     });
@@ -169,7 +172,7 @@ export class TiendaComponent implements OnInit {
         this.sceneTorzo.remove(child);
       }
     });
-
+    console.log(imagen);
     let src = imagen;
     const loader1 = new THREE.TextureLoader();
     let texture = loader1.load(src);
