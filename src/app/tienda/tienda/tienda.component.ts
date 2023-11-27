@@ -126,12 +126,18 @@ export class TiendaComponent implements OnInit {
 
   obtenerLogoEspalda() {
     this.logoServices.obtenerLogo('Espalda').subscribe((e) => {
+      e.forEach(item => {
+        item.url = `https://tienda-mind-api.onrender.com${item.url}`;
+      });
       this.lstLogosEspalda = e;
     });
   }
 
   obtenerLogoHombro() {
     this.logoServices.obtenerLogo('Hombro').subscribe((e) => {
+      e.forEach(item => {
+        item.url = `https://tienda-mind-api.onrender.com${item.url}`;
+      });
       this.lstLogoBrazo = e;
     });
   }
@@ -172,9 +178,10 @@ export class TiendaComponent implements OnInit {
         this.sceneTorzo.remove(child);
       }
     });
-    console.log(imagen);
     let src = imagen;
     const loader1 = new THREE.TextureLoader();
+    loader1.crossOrigin = "anonymous"; // Añade esta línea
+    console.log(src)
     let texture = loader1.load(src);
     const logoPechos = new THREE.MeshBasicMaterial({
       map: texture,

@@ -1,6 +1,0 @@
-{
-  "/uploads": {
-    "target": "https://tienda-mind-api.onrender.com",
-    "secure": true
-  }
-}

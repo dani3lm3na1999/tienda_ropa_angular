@@ -28,24 +28,12 @@ export class LogosComponent implements OnInit {
     this.MostrarLogos();
   }
 
-  // MostrarLogos(){
-  //   this.logoService.obtenerLogos().subscribe({
-  //     next: (r) => {
-  //       this.logos = r;
-  //       console.log(r);
-  //     },
-  //     error: (e) => {},
-  //     complete: () => { }
-  //   });
-  // }
-
   MostrarLogos(){
     this.logoService.obtenerLogos().subscribe({
       next: (r) => {        
         r.forEach(logo => {
           logo.url = `https://tienda-mind-api.onrender.com${logo.url}`
         });
-        console.log(r);
         this.logos = r;
       },
       error: (e) => {console.log(e)},
