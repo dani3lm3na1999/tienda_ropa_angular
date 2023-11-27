@@ -3,7 +3,7 @@
     <form [formGroup]="logoForm" (ngSubmit)="guardarLogos()">
       <div class="card text-center">
         <div class="card-header">
-          <h4 class="card-title">Datos a Guardar</h4>
+          <h3 class="card-title">Datos a Guardar</h3>
         </div>
         <div class="card-body">
           <div class="form-floating mb-3">
@@ -21,7 +21,7 @@
           </div>
         </div>
         <br>
-        <div class="card-footer text-muted d-flex justify-content-between">
+        <div class="card-footer text-muted text-center">
           <button class="btn btn-outline-success" [disabled]="logoForm.invalid">
             <i class="bi bi-floppy-fill"></i>
           </button>
