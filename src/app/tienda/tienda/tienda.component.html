@@ -20,7 +20,7 @@
             <h4 class="card-title">Datos a Guardar</h4>
           </div>
           <div class="card-body">
-            
+
             <div class="input-group">
               <div class="form-floating mb-3">
                 <input type="text" class="form-control input-width" id="floatingnombre" formControlName="nombre"  [attr.disabled]="idActivo ? null : true"/>
@@ -154,7 +154,7 @@
             </div>
           </div>
           <br />
-          <div class="card-footer text-muted d-flex justify-content-between">
+          <div class="card-footer text-muted text-center">
             <button class="btn btn-outline-success" (click)="guardarProducto()" [attr.disabled]="idActivo ? null : true"  [attr.hidden]="idActivo ? null : true">
               <i class="bi bi-floppy-fill"></i>
             </button>
