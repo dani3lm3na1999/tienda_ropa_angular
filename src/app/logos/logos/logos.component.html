@@ -2,20 +2,22 @@
   <div class="col-lg-7 mx-auto" id="contenedor-datos">
     <form [formGroup]="logoForm" (ngSubmit)="guardarLogos()">
       <div class="card text-center">
-        <div class="card-header">Datos a Guardar</div>
+        <div class="card-header">
+          <h4 class="card-title">Datos a Guardar</h4>
+        </div>
         <div class="card-body">
-          <div class="custom-file mb-3">
-            <label for="floatingNombre">Seleccione un logo</label>
+          <div class="form-floating mb-3">
+            <label for="customFile">Seleccione un logo</label>
             <br>
             <input type="file" class="custom-file-input" id="customFile" accept=".jpg, .jpeg, .png" (change)="obtenerImagen($event)" formControlName="url">
           </div>
-          <div class="mb-3">
-            <label for="">Seleccione una parte de la camisa</label>
-            <select class="form-select" aria-label="Default select example" formControlName="tipo">
+          <div class="form-floating mb-3">            
+            <select class="form-select" aria-label="Default select example" formControlName="tipo" id="tipoLogo">
               <option value="Torzo">Torzo</option>
               <option value="Hombro">Hombro</option>
               <option value="Espalda">Espalda</option>
             </select>
+            <label for="tipoLogo"><b>Seleccione la parte de la camisa</b></label>
           </div>
         </div>
         <br>

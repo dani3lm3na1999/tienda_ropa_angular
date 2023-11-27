@@ -1,5 +1,20 @@
 .table-container {
-    max-height: 300px; /* Ajusta la altura máxima según tus necesidades */
-    overflow-y: auto;
-  }
-  
+  max-height: 300px;
+  /* Ajusta la altura máxima según tus necesidades */
+  overflow-y: auto;
+  background-color: #e9e9b2;
+  box-shadow: 3px 3px 5px 3px rgb(54, 54, 54);
+}
+
+.card {
+  background-color: #dbdbc4;
+  box-shadow: 3px 3px 5px 3px rgb(54, 54, 54);
+}
+
+input, select {
+  background-color: #e9e9b2;
+}
+
+option {
+  background-color: #F5F5DC;
+}
