@@ -126,27 +126,19 @@ export class TiendaComponent implements OnInit {
 
   obtenerLogoEspalda() {
     this.logoServices.obtenerLogo('Espalda').subscribe((e) => {
-      e.forEach(item => {
-        item.url = `https://tienda-mind-api.onrender.com${item.url}`;
-      });
       this.lstLogosEspalda = e;
     });
   }
 
   obtenerLogoHombro() {
     this.logoServices.obtenerLogo('Hombro').subscribe((e) => {
-      e.forEach(item => {
-        item.url = `https://tienda-mind-api.onrender.com${item.url}`;
-      });
       this.lstLogoBrazo = e;
     });
   }
 
   obtenerLogoTorzo() {
     this.logoServices.obtenerLogo('Torzo').subscribe((e) => {
-      e.forEach(item => {
-        item.url = `https://tienda-mind-api.onrender.com${item.url}`;
-      });
+   
       this.lstLogoPecho = e;
     });
   }

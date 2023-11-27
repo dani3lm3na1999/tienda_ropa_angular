@@ -18,9 +18,6 @@ export class LogsService {
     return this.HttpClient.get<any[]>(`${this.url}/logos`);
   }
   
-  obtenerlogo_v2(): Observable<any[]> {
-    return this.HttpClient.get<any[]>("https://tienda-mind-api.onrender.com/api/logos");
-  }
   obtenerLogo(tipo:String): Observable<any[]> {
     return this.HttpClient.get<any[]>(`${this.url}/logos/${tipo}`);
   }
