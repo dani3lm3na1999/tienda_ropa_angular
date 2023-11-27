@@ -20,50 +20,61 @@
             <h4 class="card-title">Datos a Guardar</h4>
           </div>
           <div class="card-body">
-            <div class="form-floating mb-3">
-              <input type="text" class="form-control" id="floatingnombre" formControlName="nombre"  [attr.disabled]="idActivo ? null : true"/>
-              <label for="floatingnombre">Nombre</label>
+            
+            <div class="input-group">
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control input-width" id="floatingnombre" formControlName="nombre"  [attr.disabled]="idActivo ? null : true"/>
+                <label for="floatingnombre">Nombre</label>
+              </div>
+              <div class="form-floating mb-3">
+                <select class="form-select input-width" aria-label="Floating label select example" formControlName="categoria"
+                  id="floatingCategorias" [(ngModel)]="selectCategoria" name="opciones"  [attr.disabled]="idActivo ? null : true">
+                  <option *ngFor="let opcion of lstMostrarCategorias" [value]="opcion._id">
+                    {{ opcion.nombre }}
+                  </option>
+                </select>
+                <label for="floatingCategorias">Seleccione una categoria</label>
+              </div>
             </div>
-            <div class="form-floating mb-3">
-              <select class="form-select" aria-label="Floating label select example" formControlName="categoria"
-                id="floatingCategorias" [(ngModel)]="selectCategoria" name="opciones"  [attr.disabled]="idActivo ? null : true">
-                <option *ngFor="let opcion of lstMostrarCategorias" [value]="opcion._id">
-                  {{ opcion.nombre }}
-                </option>
-              </select>
-              <label for="floatingCategorias">Seleccione una categoria</label>
-            </div>
-            <div class="form-floating mb-3">
-              <select class="form-select" aria-label="Default select example" formControlName="tela"
-              id="floatingTela"  [attr.disabled]="idActivo ? null : true">
-                <option value="Algodon">Algodón</option>
-                <option value="Nailon">Nailon</option>
-                <option value="Poliester">Poliéster</option>
-              </select>
-              <label for="floatingTela">Seleccione un tipo de tela</label>
-            </div>
-            <div class="form-floating mb-3">              
-              <select class="form-select" aria-label="Default select example" formControlName="talla"
-              id="floatingTalla"  [attr.disabled]="idActivo ? null : true">
-                <option value="S">S</option>
-                <option value="M">M</option>
-                <option value="L">L</option>
-                <option value="XL">XL</option>
-              </select>
-              <label for="floatingTalla">Seleccione una talla</label>
-            </div>
+            
+            <div class="input-group">
+              <div class="form-floating mb-3">
+                <select class="form-select input-width" aria-label="Default select example" formControlName="tela"
+                id="floatingTela"  [attr.disabled]="idActivo ? null : true">
+                  <option value="Algodon">Algodón</option>
+                  <option value="Nailon">Nailon</option>
+                  <option value="Poliester">Poliéster</option>
+                </select>
+                <label for="floatingTela">Seleccione un tipo de tela</label>
+              </div>
+              <div class="form-floating mb-3">              
+                <select class="form-select input-width" aria-label="Default select example" formControlName="talla"
+                id="floatingTalla"  [attr.disabled]="idActivo ? null : true">
+                  <option value="S">S</option>
+                  <option value="M">M</option>
+                  <option value="L">L</option>
+                  <option value="XL">XL</option>
+                </select>
+                <label for="floatingTalla">Seleccione una talla</label>
+              </div>
+            </div>            
+
             <div class="form-floating mb-3">
               <input type="text" class="form-control" id="floatingDescrip" formControlName="descripcion"   [attr.disabled]="idActivo ? null : true"/>
               <label class="form-label" for="floatingDescrip">Descripcion</label>
             </div>
-            <div class="form-floating mb-3">
-              <input type="number" class="form-control" id="floatingExistencias" formControlName="existencias"   [attr.disabled]="idActivo ? null : true"/>
-              <label for="floatingExistencias">Existencias</label>
-            </div>
-            <div class="form-floating mb-3">
-              <input type="number" class="form-control" id="floatingPrecio" formControlName="precio"   [attr.disabled]="idActivo ? null : true"/>
-              <label for="floatingPrecio">Precio</label>
-            </div>
+
+            <div class="input-group">
+              <div class="form-floating mb-3">
+                <input type="number" class="form-control input-width" id="floatingExistencias" formControlName="existencias"   [attr.disabled]="idActivo ? null : true"/>
+                <label for="floatingExistencias">Existencias</label>
+              </div>
+  
+              <div class="form-floating mb-3">
+                <input type="number" class="form-control input-width" id="floatingPrecio" formControlName="precio"   [attr.disabled]="idActivo ? null : true"/>
+                <label for="floatingPrecio">Precio</label>
+              </div>
+            </div>            
 
             <div class="row">
               <div class="col" id="colores">

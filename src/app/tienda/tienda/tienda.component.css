@@ -64,7 +64,7 @@
 
 .card {
   background-color: #dbdbc4 ;
-  box-shadow: 3px 3px 5px rgb(54, 54, 54);
+  box-shadow: 3px 3px 5px 3px rgb(54, 54, 54);
 }
 
 input, select {
@@ -75,6 +75,10 @@ option {
   background-color: #F5F5DC;
 }
 
+.input-width {
+  width: 95%;
+}
+
 @media screen and (max-width: 768px) {
   #contendor-camisa {
     margin-bottom: 2rem;
@@ -83,4 +87,8 @@ option {
   #contenedor-datos {
     margin-bottom: 2rem;
   }
+}
+
+#floatingDescrip{
+  width: 97.5%;
 }
