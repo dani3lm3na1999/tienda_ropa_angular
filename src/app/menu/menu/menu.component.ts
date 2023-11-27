@@ -40,14 +40,7 @@ export class MenuComponent implements OnInit {
   obtenerCategorias() {
     this.categoriasServices.obtenerProducto().subscribe({
       next: (r) => {
-        const lista: any[] = []
-        r.forEach(e=>{
-          if(e.nombre === 'UNIFORMES DEPORTIVOS' || e.nombre === 'UNIFORMES EMPRESARIALES'){
-          }else{
-            lista.push(e)
-          }
-        })
-        this.lstMostrarCategorias = lista;
+        this.lstMostrarCategorias = r;
       },
       error: (e) => {},
       complete: () => {},

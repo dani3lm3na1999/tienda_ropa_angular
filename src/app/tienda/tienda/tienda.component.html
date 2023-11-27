@@ -144,11 +144,11 @@
           </div>
           <br />
           <div class="card-footer text-muted d-flex justify-content-between">
-            <button class="btn btn-outline-success" (click)="guardarProducto()" [attr.disabled]="idActivo ? null : true">
+            <button class="btn btn-outline-success" (click)="guardarProducto()" [attr.disabled]="idActivo ? null : true"  [attr.hidden]="idActivo ? null : true">
               <i class="bi bi-floppy-fill"></i>
             </button>
 
-            <button class="btn btn-outline-danger" (click)="eliminarProducto()" [disabled]="idActivo == true">
+            <button class="btn btn-outline-danger" (click)="eliminarProducto()" [disabled]="idActivo == true" [hidden]="idActivo == true">
               <i class="bi bi-trash3"></i>
             </button>
           </div>
