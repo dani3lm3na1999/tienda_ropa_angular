@@ -8,6 +8,7 @@ import { MenuComponent } from './menu/menu/menu.component';
 import { LogosComponent } from './logos/logos/logos.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar.component';
+import { DetallesComponent } from './detalles/detalles/detalles.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     MenuComponent,
     LogosComponent,
     NavbarComponent,
+    DetallesComponent,
   ],
   imports: [
     FormsModule,

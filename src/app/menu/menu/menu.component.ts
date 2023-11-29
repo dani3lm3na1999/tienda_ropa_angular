@@ -58,4 +58,16 @@ export class MenuComponent implements OnInit {
       complete: () => {},
     });
   }
+
+  mostrarUnProductoDetalleId(id:string){
+    this.productoService.obtenerProductoById(id).subscribe({
+      next: (r) => {
+        this.routeService.navigate(['/Detalles/'+r._id])
+      },
+      error: (e) => {
+        console.log(e)
+      },
+      complete: () => {},
+    });
+  }
 }
