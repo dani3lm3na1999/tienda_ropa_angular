@@ -8,7 +8,8 @@ import { MenuComponent } from './menu/menu/menu.component';
 import { LogosComponent } from './logos/logos/logos.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar.component';
-import { DetallesComponent } from './detalles/detalles/detalles.component';
+import { AcercaComponent } from './acerca/acerca.component';
+import { ContactosComponent } from './contactos/contactos.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { DetallesComponent } from './detalles/detalles/detalles.component';
     MenuComponent,
     LogosComponent,
     NavbarComponent,
-    DetallesComponent,
+    AcercaComponent,
+    ContactosComponent,
   ],
   imports: [
     FormsModule,

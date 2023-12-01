@@ -3,7 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { TiendaComponent } from './tienda/tienda/tienda.component';
 import { MenuComponent } from './menu/menu/menu.component';
 import { LogosComponent } from './logos/logos/logos.component';
-import { DetallesComponent } from './detalles/detalles/detalles.component';
+import { AcercaComponent } from './acerca/acerca.component';
+import { ContactosComponent } from './contactos/contactos.component';
 
 
 @NgModule({
@@ -18,7 +19,11 @@ import { DetallesComponent } from './detalles/detalles/detalles.component';
         },
 
         {
-          path: 'Detalles/:id', component: DetallesComponent, 
+          path: 'acerca', component: AcercaComponent, 
+        },
+
+        {
+          path: 'contacto', component: ContactosComponent, 
         },
 
         {

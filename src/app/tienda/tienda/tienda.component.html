@@ -22,19 +22,22 @@
           </div>
           <div class="card-body">
 
-            <div class="input-group">
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control input-width" id="floatingnombre" formControlName="nombre"  [attr.disabled]="idActivo ? null : true"/>
-                <label for="floatingnombre">Nombre</label>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="floatingnombre" formControlName="nombre" [attr.disabled]="idActivo ? null : true" />
+                  <label for="floatingnombre">Nombre</label>
+                </div>
               </div>
-              <div class="form-floating mb-3">
-                <select class="form-select input-width" aria-label="Floating label select example" formControlName="categoria"
-                  id="floatingCategorias" [(ngModel)]="selectCategoria" name="opciones"  [attr.disabled]="idActivo ? null : true">
-                  <option *ngFor="let opcion of lstMostrarCategorias" [value]="opcion._id">
-                    {{ opcion.nombre }}
-                  </option>
-                </select>
-                <label for="floatingCategorias">Seleccione una categoria</label>
+              <div class="col-md-6">
+                <div class="form-floating mb-3">
+                  <select class="form-select" aria-label="Floating label select example" formControlName="categoria" id="floatingCategorias" [(ngModel)]="selectCategoria" name="opciones" [attr.disabled]="idActivo ? null : true">
+                    <option *ngFor="let opcion of lstMostrarCategorias" [value]="opcion._id">
+                      {{ opcion.nombre }}
+                    </option>
+                  </select>
+                  <label for="floatingCategorias">Seleccione una categoría</label>
+                </div>
               </div>
             </div>
             
@@ -75,11 +78,12 @@
                 <input type="number" class="form-control input-width" id="floatingPrecio" formControlName="precio"   [attr.disabled]="idActivo ? null : true"/>
                 <label for="floatingPrecio">Precio</label>
               </div>
-            </div>            
-
+            </div>  
+            
+            
             <div class="row">
-              <div class="col" id="colores">
-                <div class="custom-file" style="margin-right: 1rem">
+              <div class="col-md-4" >
+                <div class="custom-file d-flex justify-content-center align-items-center" style="margin-right: 1rem">
                   <div id="carouselExample1" class="carousel slide" style="width: 200px; height: 200px">
                     <label for="">Logos para torzo</label>
                     <div class="carousel-inner">
@@ -101,8 +105,9 @@
                     </div>
                   </div>
                 </div>
-
-                <div class="custom-file" style="margin-right: 1rem">
+              </div>
+              <div class="col-md-4"  >
+                <div class="custom-file d-flex justify-content-center align-items-center" style="margin-right: 1rem">
                   <div id="carouselExample2" class="carousel slide" style="width: 200px; height: 200px">
                     <label for="">Logos para espalda</label>
                     <div class="carousel-inner">
@@ -124,11 +129,11 @@
                         </button>
                       </div>
                     </div>
-
                   </div>
                 </div>
-
-                <div class="custom-file" style="margin-right: 1rem">
+              </div>
+              <div class="col-md-4" >
+                <div class="custom-file d-flex justify-content-center align-items-center" style="margin-right: 1rem">
                   <div id="carouselExample3" class="carousel slide" style="width: 200px; height: 200px">
                     <label for="">Logos para hombro</label>
                     <div class="carousel-inner">
@@ -153,6 +158,7 @@
                 </div>
               </div>
             </div>
+
           </div>
           <br />
           <div class="card-footer text-muted text-center">

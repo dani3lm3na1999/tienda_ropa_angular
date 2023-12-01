@@ -11,6 +11,10 @@ h1 {
     h1{
         font-size: 1.5em;
     }
+
+    .card{
+        width: 100%;
+    }
 }
 
 .fondo {
@@ -21,8 +25,9 @@ h1 {
 }
 
 .card{
-    min-height: 36rem;
-    max-height: 36rem;
+    min-width: 22em;
+    min-height: 30rem;
+    max-height: 30rem;
     font-size: 0.85em;
 }
 
@@ -62,3 +67,33 @@ img {
 .nd {
     color: lightgreen;
 }
+
+.card.fondo {
+    position: relative; /* Asegura que el position absolute en el pseudo-elemento funcione correctamente */
+  }
+  
+  .card.fondo::before {
+    content: attr(titulo);
+    position: absolute;
+    top: 11%;
+    left: 0;
+    right: 0;
+    bottom: 38%;
+    transform: -50%;
+    background-color: rgba(128, 128, 128, 0.7);
+    color: #05fe16fe; /* Color del texto */
+    font-size: 18px;
+    font-family: 'Arial', sans-serif  0.5px solid;
+    padding: 10px;
+    z-index: 1;
+    display: none;
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5); /* Adjust the shadow properties */
+  }
+  
+
+.card.fondo:hover::before {
+  display: block; /* Muestra el tooltip al pasar el ratón sobre la tarjeta */
+}
+
